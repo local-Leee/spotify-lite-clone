@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
+import Header from '@/components/layouts/Header';
 
 const baseTheme = 'base-dark-theme';
 
@@ -15,7 +16,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ko">
-            <body className={baseTheme}>{children}</body>
+            <body className={baseTheme}>
+                <Header />
+                {children}
+            </body>
         </html>
     );
 }
