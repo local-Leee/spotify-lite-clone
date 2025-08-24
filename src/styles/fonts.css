@@ -1,0 +1,9 @@
+/* stylelint-disable at-rule-no-unknown */
+/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind CSS v4 syntax */
+@font-face {
+    font-family: 'Pretendard';
+    src: url('../../public/fonts/PretendardVariable.woff2') format('woff2-variations');
+    font-weight: 100 900; /* 100-900까지 모두 포함 */
+    font-style: normal;
+    font-display: swap; /* 폰트 로딩 최적화 */
+}

@@ -1,0 +1,215 @@
+/* stylelint-disable at-rule-no-unknown */
+/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind CSS v4 syntax */
+@import './fonts.css';
+@layer reset, fonts, base;
+
+:root {
+    /* 폰트 */
+    --font-pretendard: 'Pretendard', sans-serif;
+    --font-base-sans:
+        'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
+        'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol';
+    /* 색상 */
+    --color-primary: #1db954;
+    --color-secondary-01: #000000;
+    --color-secondary-02: #1f1f1f;
+    --color-secondary-03: #ffffff;
+    --color-neutral-01: #b2b2b2;
+    --color-neutral-02: #777777;
+    --color-neutral-03: #535353;
+}
+
+@layer reset {
+    * {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    a,
+    abbr,
+    acronym,
+    address,
+    applet,
+    article,
+    aside,
+    audio,
+    b,
+    big,
+    blockquote,
+    body,
+    canvas,
+    caption,
+    center,
+    cite,
+    code,
+    dd,
+    del,
+    details,
+    dfn,
+    div,
+    dl,
+    dt,
+    em,
+    embed,
+    fieldset,
+    figcaption,
+    figure,
+    footer,
+    form,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    header,
+    hgroup,
+    html,
+    i,
+    iframe,
+    img,
+    ins,
+    kbd,
+    label,
+    legend,
+    li,
+    mark,
+    menu,
+    nav,
+    object,
+    ol,
+    output,
+    p,
+    pre,
+    q,
+    ruby,
+    s,
+    samp,
+    section,
+    small,
+    span,
+    strike,
+    strong,
+    sub,
+    summary,
+    sup,
+    table,
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
+    time,
+    tr,
+    tt,
+    u,
+    ul,
+    var,
+    video {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        vertical-align: baseline;
+    }
+
+    button {
+        color: var(--text-subdued, #b3b3b3);
+        padding: 0;
+    }
+
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+        display: block;
+    }
+
+    ol,
+    ul {
+        list-style: none;
+    }
+
+    blockquote,
+    q {
+        quotes: none;
+    }
+
+    blockquote:after,
+    blockquote:before,
+    q:after,
+    q:before {
+        content: '';
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+}
+
+@layer fonts {
+    html {
+        --fallback-fonts:
+            Helvetica Neue, helvetica, arial, Hiragino Kaku Gothic ProN, Meiryo, MS Gothic;
+    }
+
+    body,
+    button,
+    input,
+    select,
+    textarea {
+        font-family: var(--font-sans), sans-serif;
+    }
+
+    .circular-sp-vietnamese,
+    .circular-sp-vietnamese button,
+    .circular-sp-vietnamese input,
+    .circular-sp-vietnamese select,
+    .circular-sp-vietnamese textarea {
+        font-family: var(--encore-body-font-stack);
+    }
+
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+@layer base {
+    .base-dark-theme {
+        --background-base: #121212;
+        --background-highlight: #1f1f1f;
+        --background-press: #000;
+        --background-elevated-base: #1f1f1f;
+        --background-elevated-highlight: #2a2a2a;
+        --background-elevated-press: #191919;
+        --background-tinted-base: #ffffff1a;
+        --background-tinted-highlight: #ffffff24;
+        --background-tinted-press: #ffffff36;
+        --text-base: #fff;
+        --text-subdued: #b3b3b3;
+        --text-bright-accent: #1ed760;
+        --text-negative: #f3727f;
+        --text-warning: #ffa42b;
+        --text-positive: #1ed760;
+        --text-announcement: #4cb3ff;
+        --essential-base: #fff;
+        --essential-subdued: #7c7c7c;
+        --essential-bright-accent: #1ed760;
+        --essential-negative: #ed2c3f;
+        --essential-warning: #ffa42b;
+        --essential-positive: #1ed760;
+        --essential-announcement: #4cb3ff;
+        --decorative-base: #fff;
+        --decorative-subdued: #292929;
+    }
+}
