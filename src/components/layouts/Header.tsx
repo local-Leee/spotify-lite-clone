@@ -1,6 +1,8 @@
 import Link from 'next/link';
-import IconHome from '@/components/icons/icon-home';
-import IconLogo from '@/components/icons/icon-logo';
+import IconHome from '@/components/icons/IconHome';
+import IconLibrary from '@/components/icons/IconLibrary';
+import IconLogo from '@/components/icons/IconLogo';
+import IconTrailing from '@/components/icons/IconTrailing';
 
 export default function Header() {
     return (
@@ -8,7 +10,9 @@ export default function Header() {
             <Link href="/">
                 <IconLogo />
             </Link>
-            <IconHome />
+            <IconHome shape="line" />
+            <IconLibrary shape="open" />
+            <IconTrailing />
         </header>
     );
 }
