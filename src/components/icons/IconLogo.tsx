@@ -19,6 +19,7 @@ export default function IconLogo({
             viewBox="0 0 24 24"
             aria-label="Spotify"
             aria-hidden="false"
+            width={sizes[size]}
             height={sizes[size]}
             data-encore-id="logoSpotify"
             style={{ fill: fillColors[fillColor] } as React.CSSProperties}

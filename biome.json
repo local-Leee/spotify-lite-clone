@@ -17,7 +17,9 @@
     },
     "javascript": {
         "formatter": {
-            "quoteStyle": "single"
+            "quoteStyle": "single",
+            "jsxQuoteStyle": "double",
+            "trailingComma": "es5"
         }
     },
     "linter": {

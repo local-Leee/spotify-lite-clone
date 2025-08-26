@@ -3,7 +3,7 @@ export default function IconClose({
     shape = 'grid',
 }: {
     fillColor?: 'base' | 'primary';
-    size?: 'base' | 'small';
+    size?: 'base';
     shape?: 'grid' | 'compactGrid' | 'list' | 'compactList';
 }) {
     const fillColors = {
@@ -25,6 +25,7 @@ export default function IconClose({
             data-encore-id="icon"
             role="img"
             aria-hidden="true"
+            width={sizes.base}
             height={sizes.base}
             viewBox="0 0 16 16"
             style={{ fill: fillColors[fillColor] } as React.CSSProperties}

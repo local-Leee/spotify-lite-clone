@@ -19,6 +19,7 @@ export default function IconSearch({
             role="img"
             aria-hidden="true"
             viewBox="0 0 24 24"
+            width={sizes[size]}
             height={sizes[size]}
             style={{ fill: fillColors[fillColor] } as React.CSSProperties}
         >

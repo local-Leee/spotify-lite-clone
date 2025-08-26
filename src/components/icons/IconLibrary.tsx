@@ -33,6 +33,7 @@ export default function IconLibrary({
             data-encore-id="icon"
             role="img"
             aria-hidden="true"
+            width={sizes[size]}
             height={sizes[size]}
             viewBox="0 0 24 24"
             style={{ fill: fillColors[fillColor] } as React.CSSProperties}
