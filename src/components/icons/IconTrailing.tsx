@@ -1,16 +1,11 @@
 export default function IconTrailing({
-    fillColor = 'base',
     size = 'base',
     shape = 'base',
 }: {
-    fillColor?: 'base' | 'primary';
     size?: 'base' | 'large';
     shape?: 'base' | 'fill';
 }) {
-    const fillColors = {
-        base: 'var(--decorative-base)',
-        primary: 'var(--color-primary)',
-    };
+    const fillColors = 'var(--text-subdued)';
     const sizes = {
         base: '24',
         large: '48',
@@ -32,7 +27,7 @@ export default function IconTrailing({
             viewBox="0 0 24 24"
             width={sizes[size]}
             height={sizes[size]}
-            style={{ fill: fillColors[fillColor] } as React.CSSProperties}
+            style={{ fill: fillColors } as React.CSSProperties}
         >
             <path d={shapes[shape].path1}></path>
             {shape === 'base' && <path d={shapes.base.path2}></path>}

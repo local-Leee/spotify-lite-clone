@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import Header from '@/components/layouts/Header';
+import MyLibrary from '@/components/layouts/MyLibrary';
+import { cn } from '@/lib/utils';
 
 const baseTheme = 'base-dark-theme';
 
@@ -16,9 +18,14 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ko">
-            <body className={baseTheme}>
+            <body className={cn(baseTheme, 'overflow-hidden')}>
                 <Header />
-                {children}
+                <div className="flex gap-4">
+                    <MyLibrary />
+                    <main className="flex-1">
+                        {children}
+                    </main>
+                </div>
             </body>
         </html>
     );
