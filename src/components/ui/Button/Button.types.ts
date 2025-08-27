@@ -3,4 +3,5 @@ export interface ButtonProps extends React.ComponentProps<'button'>{
     size?: 'xsmall' | 'small' | 'medium' | 'large';
     disabled?: boolean;
     shape?: 'base' | 'circle';
+    bgColor?: 'base' | 'white' | 'primary';
 }

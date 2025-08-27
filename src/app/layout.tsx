@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import '@/styles/globals.css';
 import Header from '@/components/layouts/Header';
 import MyLibrary from '@/components/layouts/MyLibrary';
 import { cn } from '@/lib/utils';
+import '@/styles/globals.css';
+import type { Metadata } from 'next';
 
 const baseTheme = 'base-dark-theme';
 

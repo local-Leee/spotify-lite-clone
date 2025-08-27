@@ -1,20 +1,19 @@
-import IconHome from '@/components/icons/IconHome';
-import IconSearch from '@/components/icons/IconSearch';
-import IconLogo from '@/components/icons/IconLogo';
-import {Button} from '@/components/ui/Button/Button';
-import {Input} from '@/components/ui/Input/Input';
-import { cn } from '@/lib/utils';
-import Link from 'next/link';
-import IconTrailing from '@/components/icons/IconTrailing';
 import IconFriendActivity from '@/components/icons/IconFriendActivity';
+import IconHome from '@/components/icons/IconHome';
+import IconLogo from '@/components/icons/IconLogo';
+import IconSearch from '@/components/icons/IconSearch';
+import IconTrailing from '@/components/icons/IconTrailing';
+import { Button } from '@/components/ui/Button/Button';
+import { Input } from '@/components/ui/Input/Input';
+import Link from 'next/link';
 import IconWhatNewFeed from '../icons/IconWhatNewFeed';
 
 export default function Header() {
     return (
-        <header className="flex items-center justify-between py-4 relative">
-            <div className="flex-shrink-0">
+        <header className="flex items-center justify-between relative">
+            <div className="flex-shrink-0 w-[72px] h-[72px] flex items-center justify-center">
                 <Link href="/">
-                    <IconLogo />
+                    <IconLogo/>
                 </Link>
             </div>
             <div className="flex items-center gap-4 flex-shrink-0 mx-auto absolute left-1/2 -translate-x-1/2">

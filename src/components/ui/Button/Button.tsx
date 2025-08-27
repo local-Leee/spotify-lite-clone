@@ -1,7 +1,7 @@
 "use client";
 
-import type { ButtonProps } from "./Button.types";
 import { cn } from "@/lib/utils";
+import type { ButtonProps } from "./Button.types";
 
 const Button = ({
         variant = 'base',
@@ -10,6 +10,7 @@ const Button = ({
         shape = 'base',
         className,
         children,
+        bgColor = 'base',
         ...props
     }: ButtonProps) => {
 
@@ -20,7 +21,7 @@ const Button = ({
             }
             props.onClick?.(e);
         }
-        const baseStyle = "flex shrink-0 items-center justify-center bg-background-highlight text-white disabled:cursor-not-allowed disabled:bg-gray-300 transition-transform duration-100 cursor-pointer";
+        const baseStyle = "flex shrink-0 items-center justify-center text-white disabled:cursor-not-allowed disabled:bg-gray-300 transition-transform duration-100 cursor-pointer";
         const shapes = {
             base: "",
             circle: "bg-(--background-highlight) rounded-full overflow-hidden",
@@ -36,12 +37,19 @@ const Button = ({
             text: "hover:underline",
             scale: "hover:scale-104 hover:brightness-130",
         }[variant];
+
+        const bgColors = {
+            base: "bg-background-highlight",
+            white: "bg-(--decorative-base) text-black",
+            primary: "bg-(--color-primary)",
+        }[bgColor];
     return (
         <button
             onClick={buttonClick}
             disabled={disabled}
             className={cn(
                 baseStyle,
+                bgColors,
                 sizes,
                 shapes,
                 variants,
