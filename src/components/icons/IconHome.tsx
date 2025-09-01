@@ -1,5 +1,3 @@
-import { cn } from "@/lib/utils";
-
 export default function IconHome({
     size = 'base',
     active = false,
@@ -25,9 +23,9 @@ export default function IconHome({
             data-encore-id="icon-active"
             role="img"
             aria-hidden="true"
-            viewBox="0 0 24 24"
             width={sizes}
             height={sizes}
+            viewBox="0 0 24 24"
             style={{ fill: fillColors[active ? 'active' : 'base'] } as React.CSSProperties}
         >
             {active ? <path d={shapes.active}></path> : <path d={shapes.base}></path>}

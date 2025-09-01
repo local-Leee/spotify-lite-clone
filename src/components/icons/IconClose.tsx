@@ -16,7 +16,7 @@ export default function IconClose({
     const sizes = {
         base: '24',
         small: '16',
-    };
+    }[size];
     const baseStyle = "transition-transform duration-100";
     const plusStyle = "rotate-45";
     return (
@@ -24,9 +24,9 @@ export default function IconClose({
             data-encore-id="icon"
             role="img"
             aria-hidden="true"
-            width={sizes[size]}
-            height={sizes[size]}
-            viewBox="0 0 sizes[size] sizes[size]"
+            width={sizes}
+            height={sizes}
+            viewBox="0 0 24 24"
             className={cn(baseStyle, plus ? plusStyle : "")}
             style={{ fill: fillColors[fillColor] } as React.CSSProperties}
         >

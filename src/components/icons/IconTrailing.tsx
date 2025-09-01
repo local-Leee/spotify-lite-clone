@@ -9,7 +9,7 @@ export default function IconTrailing({
     const sizes = {
         base: '24',
         large: '48',
-    };
+    }[size];
     const shapes = {
         base: {
             path1: 'M15 15.5c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2',
@@ -25,8 +25,8 @@ export default function IconTrailing({
             role="img"
             aria-hidden="true"
             viewBox="0 0 24 24"
-            width={sizes[size]}
-            height={sizes[size]}
+            width={sizes}
+            height={sizes}
             style={{ fill: fillColors } as React.CSSProperties}
         >
             <path d={shapes[shape].path1}></path>

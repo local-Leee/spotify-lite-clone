@@ -10,9 +10,7 @@ export default function IconClose({
         base: 'var(--decorative-base)',
         primary: 'var(--color-primary)',
     };
-    const sizes = {
-        base: '16',
-    };
+    const sizes = '16';
     const shapes = {
         grid: 'M1 1h6v6H1zm1.5 1.5v3h3v-3zM1 9h6v6H1zm1.5 1.5v3h3v-3zM9 1h6v6H9zm1.5 1.5v3h3v-3zM9 9h6v6H9zm1.5 1.5v3h3v-3z',
         compactGrid:
@@ -25,8 +23,8 @@ export default function IconClose({
             data-encore-id="icon"
             role="img"
             aria-hidden="true"
-            width={sizes.base}
-            height={sizes.base}
+            width={sizes}
+            height={sizes}            
             viewBox="0 0 16 16"
             style={{ fill: fillColors[fillColor] } as React.CSSProperties}
         >

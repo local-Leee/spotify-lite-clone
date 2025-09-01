@@ -12,15 +12,15 @@ export default function IconLogo({
     const sizes = {
         base: '32',
         large: '48',
-    };
+    }[size];
     return (
         <svg
             role="img"
-            viewBox="0 0 24 24"
             aria-label="Spotify"
             aria-hidden="false"
-            width={sizes[size]}
-            height={sizes[size]}
+            width={sizes}
+            height={sizes}
+            viewBox="0 0 24 24"
             data-encore-id="logoSpotify"
             style={{ fill: fillColors[fillColor] } as React.CSSProperties}
         >
