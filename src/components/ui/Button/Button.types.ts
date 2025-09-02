@@ -6,5 +6,6 @@ export type ButtonProps = {
     bgColor?: 'base' | 'white' | 'primary';
     children: React.ReactNode;
     className?: string;
+    title?: string;
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }

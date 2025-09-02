@@ -1,9 +1,24 @@
+import Recommendations from '@/components/card/Recommendations';
 import { Button } from '@/components/ui/Button/Button';
 import Card from '@/components/ui/Card/Card';
 import TabItem from '@/components/ui/Tab/TabItem';
 import TabList from '@/components/ui/Tab/TabList';
 import TabPanel from '@/components/ui/Tab/TabPanel';
 import { TabsProvider } from '@/components/ui/Tab/Tabs.context';
+
+const cardData = {
+    title: "KPop Demon Hunters (Soundtrack from the Netflix Film)",
+    links: [
+        { href: "/", label: "샤이니" },
+        { href: "/", label: "태민" },
+        { href: "/", label: "헌트릭스" },
+        { href: "/", label: "사자보이즈" },
+        { href: "/", label: "아이브" },
+        { href: "/", label: "KEY" },
+        { href: "/", label: "김종현" },
+        { href: "/", label: "최민호" },
+    ],
+}
 
 export default function Home() {
     return (
@@ -23,23 +38,13 @@ export default function Home() {
                     <div className="w-full overflow-hidden overflow-x-auto scroll-smooth snap-x snap-mandatory">
                         <ul className="grid auto-cols-[195.5px] mt-4 pl-6 pr-6 whitespace-nowrap">
                             <li>
-                                <Card />
+                                <Card profile={true} title={cardData.title} links={cardData.links} />
                             </li>
                         </ul>
                     </div>
                 </TabPanel>
                 <TabPanel id="music" when="music" className="p-4">
-                    <div className="flex items-end justify-between px-6">
-                        <h2 className="text-2xl font-bold">들어볼 만한 음악</h2>                
-                        <Button variant="text" size="small" className="font-bold text-(--text-subdued)">모두 표시</Button>
-                    </div>
-                    <div className="w-full overflow-x-auto scroll-smooth snap-x snap-mandatory">
-                        <ul className="inline-flex gap-4 mt-4 pl-6 pr-6 whitespace-nowrap">
-                            <li>
-                                <Card />
-                            </li>
-                        </ul>
-                    </div>
+                    <Recommendations />
                 </TabPanel>
             </TabsProvider>
             <div className="sr-only">

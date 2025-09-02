@@ -11,6 +11,7 @@ const Button = ({
         className,
         children,
         bgColor = 'base',
+        title,
         ...props
     }: ButtonProps) => {
 
@@ -55,6 +56,7 @@ const Button = ({
                 variants,
                 className
             )}
+            title={title}
             {...props}
         >
             {children}

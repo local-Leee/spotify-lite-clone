@@ -42,3 +42,7 @@ next-env.d.ts
 
 # VS Code
 /.vscode
+
+# env
+.env
+.env.local

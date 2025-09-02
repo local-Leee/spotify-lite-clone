@@ -15,9 +15,9 @@ const TabPanel = ({
     if(active !== when) return null;
 
     return (
-        <div data-tabpanel-id={id} role="tabpanel" aria-labelledby={id} className={cn("px-4 text-sm", className)}>
+        <section data-tabpanel-id={id} role="tabpanel" aria-labelledby={id} className={cn("px-4 text-sm", className)}>
             {children}
-        </div>
+        </section>
     )
 }
 
