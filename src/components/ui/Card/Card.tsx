@@ -24,9 +24,11 @@ const Card = ({
         cardButtonPlay: "bg-(--color-primary) pointer-events-auto shadow-[0_8px_8px_rgba(0,0,0,0.3)]",
         cardTextWrap: "text-(--text-subdued)",
         cardTextEllipsis: "text-ellipsis line-clamp-2 overflow-hidden",
-        cardLinkList: "text-[inherit]",
         cardTitle: "font-bold text-white",
-        cardText: "text-m hover:underline whitespace-normal text-(--text-subdued) [&:not(:last-child)]:after:content-[','] [&:not(:last-child)]:after:mr-[3px]",
+        cardHover: "hover:underline ",
+        cardLinkList: "text-[inherit]",
+        cardText: "text-m whitespace-normal text-(--text-subdued)",
+        cardLinkText: "[&:not(:last-child)]:after:content-[','] [&:not(:last-child)]:after:mr-[3px]",
     }
     return (
         <div className={cn(baseStyle.card)}>
@@ -50,14 +52,14 @@ const Card = ({
             </div>  
             <div className={cn(baseStyle.cardTextWrap)}>
                 {title && (
-                    <Link href="/" className={cn(baseStyle.cardText, baseStyle.cardTitle, baseStyle.cardTextEllipsis)}>
+                    <Link href="/" className={cn(baseStyle.cardText, baseStyle.cardTitle, baseStyle.cardHover, baseStyle.cardTextEllipsis)}>
                         {title}
                     </Link>
                 )}
                 {links && links.length > 0 && (
                     <div className={cn(baseStyle.cardLinkList, baseStyle.cardTextEllipsis)}>  
                         {links.map((link, index) => (
-                            <Link key={index} href={link.href} className={cn(baseStyle.cardText)}>
+                            <Link key={index} href={link.href} className={cn(baseStyle.cardText, baseStyle.cardHover, baseStyle.cardLinkText)}>
                                 {link.label}
                             </Link>
                         ))}

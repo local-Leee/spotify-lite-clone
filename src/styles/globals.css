@@ -1,6 +1,7 @@
 /* stylelint-disable at-rule-no-unknown */
 /* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind CSS v4 syntax */
 @import 'tailwindcss';
+@import './fonts.css';
 @import './base.css';
 
 :root {

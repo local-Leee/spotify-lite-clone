@@ -1,10 +1,11 @@
 import IconLibrary from "@/components/icons/IconLibrary";
 import IconPlus from "@/components/icons/IconPlus";
 import { Button } from "@/components/ui/Button/Button";
+import { cn } from "@/lib/utils";
 
-export default function MyLibrary() {
+export default function MyLibrary({ id, className }: { id: string, className: string }) {
     return (
-        <nav className="w-[420px] bg-(--background-base) h-screen rounded-lg flex-shrink-0">
+        <nav id={id} className={cn("w-[420px] bg-(--background-base) h-screen rounded-lg flex-shrink-0", className)}>   
             <header className="flex items-center px-4 py-4">
                 <Button shape="base">
                     <IconLibrary shape="open" size="small"/>

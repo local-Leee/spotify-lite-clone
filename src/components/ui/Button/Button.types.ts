@@ -7,5 +7,6 @@ export type ButtonProps = {
     children: React.ReactNode;
     className?: string;
     title?: string;
+    role?: string;
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }

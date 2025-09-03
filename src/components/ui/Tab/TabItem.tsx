@@ -17,7 +17,7 @@ const TabItem = ({
         register(idProp);
     },[idProp, register])
 
-    const baseStyle = "flex items-center gap-2 px-4 text-sm";
+    const baseStyle = "flex items-center gap-2 px-4 text-sm bg-[var(--background-tinted-base,rgba(0,0,0,0.08))]";
     const selectedTabStyle = "bg-white text-black";
     
     return (

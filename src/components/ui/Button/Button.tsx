@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { type AriaRole } from "react";
 import type { ButtonProps } from "./Button.types";
 
 const Button = ({
@@ -12,6 +13,7 @@ const Button = ({
         children,
         bgColor = 'base',
         title,
+        role = undefined,
         ...props
     }: ButtonProps) => {
 
@@ -48,6 +50,7 @@ const Button = ({
         <button
             onClick={buttonClick}
             disabled={disabled}
+            role={role ? (role as AriaRole) : undefined}
             className={cn(
                 baseStyle,
                 bgColors,

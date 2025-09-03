@@ -1,6 +1,5 @@
 /* stylelint-disable at-rule-no-unknown */
 /* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind CSS v4 syntax */
-@import './fonts.css';
 @layer fonts, base;
 
 :root {
@@ -18,6 +17,8 @@
     --color-neutral-01: #b2b2b2;
     --color-neutral-02: #777777;
     --color-neutral-03: #535353;
+    --z-index: 1;
+    --header-height: 64px;
 }
 
 /* @layer reset {
@@ -221,5 +222,40 @@
         -webkit-line-clamp: 2;
         line-clamp: 2;
         overflow: hidden;
+    }
+
+    /* 배경 그라데이션 + 노이즈 */
+    .bg-gradient-noise {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.6) 0, var(--background-base) 100%),
+            var(--background-noise);
+        background-color: rgb(83, 83, 83);
+        background-repeat: no-repeat;
+        transition-property: background-color;
+        transition-duration: 1s;
+        transition-timing-function: ease;
+        z-index: -1;
+    }
+
+    .grid-layout {
+        display: grid;
+        grid-template-areas:
+            'global-nav global-nav global-nav'
+            'left-sidebar main-view main-view';
+        grid-template-columns: 420px 1fr;
+        grid-template-rows: var(--header-height) calc(100vh - var(--header-height));
+        column-gap: 8px;
+    }
+
+    .grid-global-nav {
+        grid-area: global-nav;
+    }
+
+    .grid-left-sidebar {
+        grid-area: left-sidebar;
+    }
+
+    .grid-main-view {
+        grid-area: main-view;
     }
 }
