@@ -1,39 +1,31 @@
 'use client';
-import Recommendations from '@/components/card/CardSection';
+import CardSection from '@/components/card/CardSection';
 import { Button } from '@/components/ui/Button/Button';
 import Card from '@/components/ui/Card/Card';
 import TabItem from '@/components/ui/Tab/TabItem';
 import TabList from '@/components/ui/Tab/TabList';
 import TabPanel from '@/components/ui/Tab/TabPanel';
 import { TabsProvider } from '@/components/ui/Tab/Tabs.context';
+import CardSectionData from '@/data/cardSection.json';
 import type { PartialOptions } from 'overlayscrollbars';
 import type { OverlayScrollbarsComponentRef } from 'overlayscrollbars-react';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'overlayscrollbars/overlayscrollbars.css';
 import { useRef, useState } from 'react';
 
-const cardData01 = {
-    title: 'KPop Demon Hunters (Soundtrack from the Netflix Film)',
-    links: [
-        { href: '/', label: '루미' },
-        { href: '/', label: '진우' },
-        { href: '/', label: '헌트릭스' },
-        { href: '/', label: '사자보이즈' },
-        { href: '/', label: '아이브' },
-        { href: '/', label: 'KEY' },
-        { href: '/', label: '태민' },
-        { href: '/', label: '믹스' },
-    ],
-};
 const cardData02 = {
     title: '앨범명을 적어주세요',
     desc: '여기에느 앨범 설명이',
 };
 
+
 const mainScrollbarOptions: PartialOptions = {
     scrollbars: {
         autoHide: 'never',
         theme: 'os-theme-light',
+    },
+    overflow: {
+        x: 'hidden',
     },
 
 };
@@ -91,29 +83,29 @@ export default function Home() {
                                 <li>
                                     <Card
                                         profile={true}
-                                        title={cardData01.title}
-                                        links={cardData01.links}
+                                        title={cardData02.title}
+                                        desc={cardData02.desc}
                                     />
                                 </li>
                                 <li>
                                     <Card
                                         profile={true}
-                                        title={cardData01.title}
-                                        links={cardData01.links}
+                                        title={cardData02.title}
+                                        desc={cardData02.desc}
                                     />
                                 </li>
                                 <li>
                                     <Card
                                         profile={true}
-                                        title={cardData01.title}
-                                        links={cardData01.links}
+                                        title={cardData02.title}
+                                        desc={cardData02.desc}
                                     />
                                 </li>
                                 <li>
                                     <Card
                                         profile={true}
-                                        title={cardData01.title}
-                                        links={cardData01.links}
+                                        title={cardData02.title}
+                                        desc={cardData02.desc}
                                     />
                                 </li>
                             </ul>
@@ -161,16 +153,16 @@ export default function Home() {
                         <div className="w-full overflow-hidden overflow-x-auto scroll-smooth snap-x snap-mandatory">
                             <ul className="grid grid-flow-col auto-cols-[195.5px] gap-4 mt-4 pl-6 pr-6">
                                 <li>
-                                    <Card title={cardData01.title} links={cardData01.links} />
+                                    <Card title={cardData02.title} desc={cardData02.desc} />
                                 </li>
                                 <li>
-                                    <Card title={cardData01.title} links={cardData01.links} />
+                                    <Card title={cardData02.title} desc={cardData02.desc} />
                                 </li>
                                 <li>
-                                    <Card title={cardData01.title} links={cardData01.links} />
+                                    <Card title={cardData02.title} desc={cardData02.desc} />
                                 </li>
                                 <li>
-                                    <Card title={cardData01.title} links={cardData01.links} />
+                                    <Card title={cardData02.title} desc={cardData02.desc} />
                                 </li>
                             </ul>
                         </div>
@@ -189,23 +181,25 @@ export default function Home() {
                         <div className="w-full overflow-hidden overflow-x-auto scroll-smooth snap-x snap-mandatory">
                             <ul className="grid grid-flow-col auto-cols-[195.5px] gap-4 mt-4 pl-6 pr-6">
                                 <li>
-                                    <Card title={cardData01.title} links={cardData01.links} />
+                                    <Card title={cardData02.title} desc={cardData02.desc} />
                                 </li>
                                 <li>
-                                    <Card title={cardData01.title} links={cardData01.links} />
+                                    <Card title={cardData02.title} desc={cardData02.desc} />
                                 </li>
                                 <li>
-                                    <Card title={cardData01.title} links={cardData01.links} />
+                                    <Card title={cardData02.title} desc={cardData02.desc} />
                                 </li>
                                 <li>
-                                    <Card title={cardData01.title} links={cardData01.links} />
+                                    <Card title={cardData02.title} desc={cardData02.desc} />
                                 </li>
                             </ul>
                         </div>
                     </section>
                 </TabPanel>
                 <TabPanel id="music" when="music" className="p-4 z-[--z-index]">
-                    <Recommendations />
+                    <CardSection 
+                        data={CardSectionData}
+                    /> 
                 </TabPanel>
             </TabsProvider>
             <div className="sr-only">

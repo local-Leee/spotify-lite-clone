@@ -1,23 +1,15 @@
 'use client';
-import Card from '@/components/ui/Card/Card';
+import { cn } from '@/lib/utils';
+import Image from 'next/image';
 import type { PartialOptions } from 'overlayscrollbars';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'overlayscrollbars/overlayscrollbars.css';
-import { useEffect, useState } from 'react';
 import { Button } from '../ui/Button/Button';
-
-type Track = {
-    id: string;
-    name: string;
-    artists: { id: string; name: string }[];
-    album: { images: { url: string }[] };
-};
-
+import Card from '../ui/Card/Card';
+import { CardSectionProps } from './CardSection.type';
 
 const cardSectionScrollbarOptions: PartialOptions = {
     scrollbars: {
-        autoHide: 'never',
-        theme: 'os-theme-light',
         visibility: 'hidden',
     },
     overflow: {
@@ -26,42 +18,52 @@ const cardSectionScrollbarOptions: PartialOptions = {
 
 };
 
-export default function CardSection() {
-    const [tracks, setTracks] = useState<Track[]>([]);
-
-    useEffect(() => {
-        fetch('/api/spotify/recommendations?seed_genres=k-pop&limit=8')
-            .then((r) => r.json())
-            .then((d) => setTracks(d.tracks ?? []))
-            .catch(console.error);
-    }, []);
-
-    if (!tracks.length) return null;
+const CardSection = ({
+    data,
+    className,
+}: CardSectionProps) => {
 
     return (
-        <OverlayScrollbarsComponent options={cardSectionScrollbarOptions} className="p-6">
+        <section className={cn("w-full", className? className : "")}>
             <div className="flex items-end justify-between px-6">
-                <h2 className="text-2xl font-bold">들어볼 만한 음악</h2>
+                <div className="flex items-end gap-2">
+                    {data.titleImg && (
+                        <div className="w-[48px] h-[48px] bg-[var(--background-base)] rounded-full overflow-hidden">
+                            <Image src={data.titleImg} alt={data.title} width={100} height={100} />
+                        </div>
+                    )}
+                    <h2 className={cn("text-2xl font-bold", data.titleImg && "pb-1")}>
+                        {data.titleDesc && (
+                            <span className="text-(--text-subdued) text-sm block">{data.titleDesc}</span>
+                        )}
+                        {data.title}
+                    </h2>
+                </div>
                 <Button variant="text" size="small" className="font-bold text-(--text-subdued)">
-                    모두 표시
+                    {data.titleBtn || "모두 표시"}
                 </Button>
-            </div>
-            <div className="w-full">
-                <ul className="inline-flex gap-4 mt-4 pl-6 pr-6 whitespace-nowrap">
-                    {tracks.map((t) => (
-                        <li key={t.id}>
+            </div>               
+            <OverlayScrollbarsComponent options={cardSectionScrollbarOptions} className="w-full">
+                <ul className="grid grid-flow-col auto-cols-[195.5px] gap-4 mt-4 pl-6 pr-6">
+                    {data.items.map((item) => (
+                        <li key={item.id}>
                             <Card
-                                title={t.name}
-                                links={t.artists.map((a) => ({
-                                    href: `/artist/${a.id}`,
-                                    label: a.name,
+                                data={item}
+                                profile={item.profile? item.profile : false}
+                                title={item.title}
+                                links={item.links.map((link) => ({
+                                    href: `/artist/${link.href}`,
+                                    label: link.label,
                                 }))}
-                                thumbUrl={t.album.images?.[0]?.url}
                             />
                         </li>
                     ))}
                 </ul>
-            </div>
-        </OverlayScrollbarsComponent>
+            </OverlayScrollbarsComponent>
+        </section>
     );
 }
+
+
+CardSection.displayName = 'CardSection';
+export default CardSection;

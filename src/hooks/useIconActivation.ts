@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 export const useIconActivation = (initialState = false) => {
     // '활성화' 상태를 관리합니다.
