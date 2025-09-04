@@ -9,4 +9,4 @@ export type ButtonProps = {
     title?: string;
     role?: string;
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
+};

@@ -10,4 +10,4 @@ export type CardProps = {
     showEtc?: boolean;
     className?: string;
     thumbUrl?: string;
-}
+};

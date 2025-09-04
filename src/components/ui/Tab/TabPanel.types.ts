@@ -3,4 +3,4 @@ export type TabPanelProps = {
     when?: string;
     children?: React.ReactNode;
     className?: string;
-}
+};

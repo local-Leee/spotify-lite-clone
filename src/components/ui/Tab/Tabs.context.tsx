@@ -1,6 +1,6 @@
 // 상태저장소 : 어떤 탭이 선택되어있는지 상태 공유하기 위한 컨텍스트
-"use client";
-import React, { createContext, useContext, useMemo, useState } from "react";
+'use client';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 
 type TabsContextValue = {
     active: string;
@@ -14,7 +14,7 @@ const TabsCtx = createContext<TabsContextValue | null>(null);
 
 export function useTabsCtx() {
     const ctx = useContext(TabsCtx);
-    if (!ctx) throw new Error("Tabs components must be inside <TabList/>");
+    if (!ctx) throw new Error('Tabs components must be inside <TabList/>');
     return ctx;
 }
 
@@ -29,9 +29,5 @@ export function TabsProvider({
     const [ids, setIds] = useState<string[]>([]);
     const register = (id: string) => setIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
     const value = useMemo(() => ({ active, setActive, register, ids }), [active, ids]);
-    return (
-        <TabsCtx.Provider value={value}>
-            {children}
-        </TabsCtx.Provider>
-    );
+    return <TabsCtx.Provider value={value}>{children}</TabsCtx.Provider>;
 }

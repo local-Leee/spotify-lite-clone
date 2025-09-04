@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 export default function IconPlus({
     fillColor = 'base',
@@ -17,8 +17,8 @@ export default function IconPlus({
         base: '24',
         small: '16',
     }[size];
-    const baseStyle = "transition-transform duration-100";
-    const closeStyle = "rotate-45";
+    const baseStyle = 'transition-transform duration-100';
+    const closeStyle = 'rotate-45';
     return (
         <svg
             data-encore-id="icon"
@@ -27,7 +27,7 @@ export default function IconPlus({
             width={sizes}
             height={sizes}
             viewBox="0 0 16 16"
-            className={cn(baseStyle, close ? closeStyle : "")}
+            className={cn(baseStyle, close ? closeStyle : '')}
             style={{ fill: fillColors[fillColor] } as React.CSSProperties}
         >
             <path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75"></path>

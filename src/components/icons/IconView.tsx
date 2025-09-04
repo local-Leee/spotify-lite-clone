@@ -24,7 +24,7 @@ export default function IconClose({
             role="img"
             aria-hidden="true"
             width={sizes}
-            height={sizes}            
+            height={sizes}
             viewBox="0 0 16 16"
             style={{ fill: fillColors[fillColor] } as React.CSSProperties}
         >

@@ -11,7 +11,7 @@ export const useIconActivation = (initialState = false) => {
     const activate = useCallback(() => {
         setIsActive(true);
     }, []);
-    
+
     // 상태를 비활성화(false)시키는 함수입니다.
     const deactivate = useCallback(() => {
         setIsActive(false);
@@ -19,7 +19,7 @@ export const useIconActivation = (initialState = false) => {
 
     // 상태를 토글하는 함수입니다.
     const toggle = useCallback(() => {
-        setIsActive(prev => !prev);
+        setIsActive((prev) => !prev);
     }, []);
 
     // 상태와 상태를 변경하는 함수들을 객체로 묶어 반환합니다.

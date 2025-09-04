@@ -1,8 +1,4 @@
-export default function IconSearch({
-    size = 'base',
-}: {
-    size?: 'base' | 'small';
-}) {
+export default function IconSearch({ size = 'base' }: { size?: 'base' | 'small' }) {
     const fillColors = 'var(--text-subdued)';
     const sizes = {
         base: '48',

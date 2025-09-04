@@ -19,8 +19,8 @@ export default function RootLayout({
         <html lang="ko">
             <body className={cn(baseTheme, 'overflow-hidden')}>
                 <div id="main" className="grid-layout">
-                    <Header id="global-nav" className="grid-global-nav"/>
-                    <MyLibrary id="left-sidebar" className="grid-left-sidebar"/>
+                    <Header id="global-nav" className="grid-global-nav" />
+                    <MyLibrary id="left-sidebar" className="grid-left-sidebar" />
                     <main id="main-view" className="grid-main-view">
                         {children}
                     </main>
