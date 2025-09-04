@@ -6,8 +6,8 @@
  * 이 훅을 쓰면 스크롤 중인지, 막 초기화했는지 같은 상태를 확인 가능
  */
 
-import type { EventListenerArgs } from "overlayscrollbars";
-import { useRef, useState } from "react";
+import type { EventListenerArgs } from 'overlayscrollbars';
+import { useRef, useState } from 'react';
 /**
  * useRef : 값 변경(상태x) -> 리렌더링 안함 -> 변경사항은 적용 | DOM 조작, 이전 값 기억 가능
  * useState : 변경(상태,값) -> 매번 리렌더링 -> 변경사항 적용 | DOM 조작 불가능, 이전 값 기억 불가능
@@ -17,23 +17,19 @@ import { useRef, useState } from "react";
 export type OverlayScrollbarsEvents = keyof EventListenerArgs;
 
 export interface EventObserverEvent {
-    active: boolean; // 이벤트 활성화 여뷰
+    active: boolean; // 이벤트 활성화 여부
     count: number; // 이벤트 발생 횟수
 }
 
-
 export const useEventObserver = () => {
-    
     // 하나의 useState로 여러 이벤트 상태를 배열로 관리 (scroll + updated가 같이 발생했다면 둘 다 active=true로 표시)
-    const [activeEvents, setActiveEvents] = useState<OverlayScrollbarsEvents[]>(
-        []
-    );
-    // 
+    const [activeEvents, setActiveEvents] = useState<OverlayScrollbarsEvents[]>([]);
+    //
     const eventCountRef = useRef<
         /**
-         * Record<K, V> : K 키에 대한 V 값을 가지는 객체 타입. 
+         * Record<K, V> : K 키에 대한 V 값을 가지는 객체 타입.
          * ㄴ 여기에선 OverlayScrollbarsEvents의 모든 키에 대해 number 값을 가져야하는 객체를 정의. 타입 변환이 아니라 '객체 구조 정의'
-         * Partial<T>: Record의 모든 키에 대해 선택적으로 값을 가지는 객체 타입을 만든다. 
+         * Partial<T>: Record의 모든 키에 대해 선택적으로 값을 가지는 객체 타입을 만든다.
          * ㄴ (값이 있는 것만 적용. Record만 있으면 값이 없으면 에러남)
          */
         Partial<Record<OverlayScrollbarsEvents, number>>
@@ -44,12 +40,9 @@ export const useEventObserver = () => {
 
     const activateEvent = (event: OverlayScrollbarsEvents) => {
         const currAmount = eventCountRef.current[event];
-        eventCountRef.current[event] =
-        typeof currAmount === "number" ? currAmount + 1 : 1;
+        eventCountRef.current[event] = typeof currAmount === 'number' ? currAmount + 1 : 1;
 
-        setActiveEvents((currActiveEvents) =>
-            Array.from(new Set([...currActiveEvents, event]))
-        );
+        setActiveEvents((currActiveEvents) => Array.from(new Set([...currActiveEvents, event])));
 
         clearTimeout(timeoutIds.current[event]);
         timeoutIds.current[event] = setTimeout(() => {
@@ -67,10 +60,10 @@ export const useEventObserver = () => {
     });
 
     const events: Record<OverlayScrollbarsEvents, EventObserverEvent> = {
-        initialized: getEventObj("initialized"),
-        destroyed: getEventObj("destroyed"),
-        updated: getEventObj("updated"),
-        scroll: getEventObj("scroll"),
+        initialized: getEventObj('initialized'),
+        destroyed: getEventObj('destroyed'),
+        updated: getEventObj('updated'),
+        scroll: getEventObj('scroll'),
     };
 
     return [events, activateEvent] as const;
