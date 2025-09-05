@@ -12,7 +12,7 @@ const TabList = ({ children, scrollState, className }: TabListProps) => {
     return (
         <div
             role="tablist"
-            data-id="tablist"
+            data-encore-id="tablist"
             className={cn(baseStyle, scrollState && stickyStyle, className)}
         >
             {children}

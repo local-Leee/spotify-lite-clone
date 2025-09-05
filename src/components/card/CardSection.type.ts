@@ -4,6 +4,7 @@ export type CardSectionData = {
     titleDesc?: string;
     titleBtn?: string;
     items: {
+        profile?: boolean;
         id: number;
         title: string;
         links: {

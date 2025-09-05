@@ -41,7 +41,6 @@ const Card = ({
                 </div>
                 <div className={cn(baseStyle.cardButtonWrap)}>
                     <Button
-                        aria-label="재생"
                         variant="scale"
                         size="medium"
                         shape="circle"

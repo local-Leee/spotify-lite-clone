@@ -258,4 +258,19 @@
     .grid-main-view {
         grid-area: main-view;
     }
+
+    /* 스크롤바 숨기기 */
+    .scrollbar-hide {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
+    }
+
+    /* 스크롤 패딩 설정 */
+    .scroll-padding-left {
+        scroll-padding-left: 1.5rem; /* 24px */
+    }
 }

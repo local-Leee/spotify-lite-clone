@@ -52,7 +52,7 @@ export default function Home() {
     return (
         <OverlayScrollbarsComponent
             options={mainScrollbarOptions}
-            data-id="home"
+            data-encore-id="home"
             ref={osRef}
             events={{
                 scroll: scrollContent,
@@ -196,10 +196,8 @@ export default function Home() {
                         </div>
                     </section>
                 </TabPanel>
-                <TabPanel id="music" when="music" className="p-4 z-[--z-index]">
-                    <CardSection 
-                        data={CardSectionData}
-                    /> 
+                <TabPanel id="music" when="music" className="px-0 z-[var(--z-index)]">
+                    <CardSection data={CardSectionData} /> 
                 </TabPanel>
             </TabsProvider>
             <div className="sr-only">
