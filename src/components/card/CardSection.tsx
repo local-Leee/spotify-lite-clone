@@ -74,9 +74,9 @@ const CardSection = ({
         titleImg: "w-[48px] h-[48px] bg-[var(--background-base)] rounded-full overflow-hidden",
         titleDesc: "text-(--text-subdued) text-sm block",
         title: "text-2xl font-bold",
-        cardList: "grid grid-flow-col auto-cols-[195.5px]",
+        cardList: "grid grid-flow-col auto-cols-[195.5px] after:content-[''] after:w-6 after:snap-end",
         carouselsWrap: "relative group/slider",
-        cardListWrap: "w-full overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide scroll-behavior-smooth p-0 scroll-ps-6",
+        cardListWrap: "w-full overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide scroll-behavior-smooth px-6 scroll-px-6",
         sliderButtons: "absolute top-[50%] transform-[translateY(-50%)] z-[var(--z-index)] opacity-0 group-hover/slider:opacity-100 transition-opacity duration-300",
         sliderButtonLeft: "left-4",
         sliderButtonRight: "right-4",
@@ -108,7 +108,7 @@ const CardSection = ({
                 </Button>
             </header>               
             <div className={cn(baseStyle.carouselsWrap)}>
-                <div ref={scrollContainerRef} className={cn(baseStyle.cardListWrap)} >
+                <div ref={scrollContainerRef} className={cn(baseStyle.cardListWrap)}>
                     <ul className={cn(baseStyle.cardList)}>
                         {data.items.map((item) => (
                             <li key={item.id} className="snap-start">
