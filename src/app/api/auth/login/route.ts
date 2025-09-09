@@ -30,11 +30,13 @@ export async function GET() {
     });
 
     const res = NextResponse.redirect(`https://accounts.spotify.com/authorize?${params.toString()}`);
-
+    
     // httpOnly 쿠키에 보관 (클라 JS에서 접근 불가)
     const secure = process.env.NODE_ENV === "production";
     res.cookies.set("sp_cv", verifier, { httpOnly: true, secure, sameSite: "lax", path: "/", maxAge: 600 });
     res.cookies.set("sp_state", state,   { httpOnly: true, secure, sameSite: "lax", path: "/", maxAge: 600 });
+    
+    console.log("AUTH redirect_uri =", process.env.SPOTIFY_REDIRECT_URI);
 
     return res;
 }
