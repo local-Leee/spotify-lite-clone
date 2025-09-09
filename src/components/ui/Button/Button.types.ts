@@ -5,8 +5,8 @@ export type ButtonProps = {
     shape?: 'base' | 'circle';
     bgColor?: 'base' | 'white' | 'primary';
     children: React.ReactNode;
-    className?: string;
     title?: string;
+    className?: string;
     role?: string;
     asChild?: boolean;
     onClick?: (e: React.MouseEvent<HTMLElement>) => void;
