@@ -1,7 +1,7 @@
 'use client';
 
-import type { InputProps } from './Input.types';
 import { cn } from '@/lib/utils';
+import type { InputProps } from './Input.types';
 
 const Input = ({
     variant = 'base',
@@ -10,6 +10,10 @@ const Input = ({
     shape = 'base',
     className,
     children,
+    type = 'text',
+    placeholder,
+    id,
+    name,
     ...props
 }: InputProps) => {
     const baseStyle =
@@ -25,8 +29,11 @@ const Input = ({
         'focus:bg-(--background-elevated-highlight) focus:shadow(inset 0,0,0,2px #fff) cursor-unset ';
     return (
         <input
-            type="text"
+            id={id}
+            type={type}
+            name={name}
             disabled={disabled}
+            placeholder={placeholder}
             className={cn(baseStyle, sizes, variants, className)}
             {...props}
         >

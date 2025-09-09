@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import IconWhatNewFeed from '../icons/IconWhatNewFeed';
 
+
 export default function Header({ id, className }: { id: string; className: string }) {
     return (
         <header id={id} className={cn('flex items-center justify-between relative', className)}>
@@ -32,8 +33,10 @@ export default function Header({ id, className }: { id: string; className: strin
                         name="headerSearch"
                     />
                     <div className="absolute right-0 top-1/2 translate-y-[-50%] z-1 w-12 flex items-center justify-center border-l border-(--text-subdued)">
-                        <Button size="xsmall" title="둘러보기" className="w-full h-full">
-                            <IconTrailing />
+                        <Button size="xsmall" title="둘러보기" className="w-full h-full" asChild>
+                            <Link href="/search">
+                                <IconTrailing />
+                            </Link>
                         </Button>
                     </div>
                 </form>

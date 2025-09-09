@@ -1,5 +1,6 @@
 'use client';
 
+import { Slot } from '@/lib/Slot';
 import { cn } from '@/lib/utils';
 import { type AriaRole } from 'react';
 import type { ButtonProps } from './Button.types';
@@ -14,6 +15,7 @@ const Button = ({
     bgColor = 'base',
     title,
     role = undefined,
+    asChild = false,
     ...props
 }: ButtonProps) => {
     const buttonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -46,17 +48,18 @@ const Button = ({
         white: 'bg-(--decorative-base) text-black',
         primary: 'bg-(--color-primary)',
     }[bgColor];
+    const Comp: any = asChild ? Slot : "button";
     return (
-        <button
+        <Comp
             onClick={buttonClick}
-            disabled={disabled}
+            {...(!asChild ? {disabled}: {})}
             role={role ? (role as AriaRole) : undefined}
             className={cn(baseStyle, bgColors, sizes, shapes, variants, className)}
             title={title}
             {...props}
         >
             {children}
-        </button>
+        </Comp>
     );
 };
 
