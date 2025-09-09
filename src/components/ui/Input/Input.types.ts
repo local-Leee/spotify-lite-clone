@@ -7,6 +7,6 @@ export type InputProps = {
     children?: React.ReactNode;
     placeholder?: string;
     id?: string;
-    name?: string;
     type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search' | 'date' | 'time' | 'datetime-local' | 'month' | 'week';
+    name?: string;
 };
