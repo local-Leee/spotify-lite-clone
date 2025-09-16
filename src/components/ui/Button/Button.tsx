@@ -26,10 +26,10 @@ const Button = ({
         props.onClick?.(e);
     };
     const baseStyle =
-        'flex shrink-0 items-center justify-center text-white disabled:cursor-not-allowed disabled:bg-gray-300 transition-transform duration-100 cursor-pointer';
+        'flex shrink-0 items-center justify-center text-white disabled:cursor-not-allowed disabled:bg-gray-300 focus-visible:brightness-130 transition-transform duration-100 cursor-pointer';
     const shapes = {
         base: '',
-        circle: 'bg-(--background-highlight) rounded-full overflow-hidden',
+        circle: 'rounded-full overflow-hidden',
     }[shape];
     const sizes = {
         xsmall: 'min-w-6 min-h-6',
@@ -41,10 +41,12 @@ const Button = ({
         base: 'hover:brightness-130',
         text: 'hover:underline',
         scale: 'hover:scale-104 hover:brightness-130',
+        scaleWhite: 'hover:scale-104 hover:brightness-90',
     }[variant];
 
     const bgColors = {
-        base: 'bg-background-highlight',
+        base: 'bg-(--background-highlight)',
+        transparent: 'bg-transparent',
         white: 'bg-(--decorative-base) text-black',
         primary: 'bg-(--color-primary)',
     }[bgColor];
@@ -64,4 +66,6 @@ const Button = ({
 };
 
 Button.displayName = 'Button';
+export default Button;
 export { Button };
+

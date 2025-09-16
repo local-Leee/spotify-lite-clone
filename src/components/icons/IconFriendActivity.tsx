@@ -4,7 +4,7 @@ export default function IconFriendActivity({
     fillColor?: 'base' | 'primary';
 }) {
     const fillColors = {
-        base: 'var(--decorative-base)',
+        base: 'var(--text-subdued)',
         primary: 'var(--color-primary)',
     };
     const size = '16';

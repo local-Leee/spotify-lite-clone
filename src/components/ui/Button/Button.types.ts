@@ -1,9 +1,9 @@
 export type ButtonProps = {
-    variant?: 'base' | 'text' | 'scale';
+    variant?: 'base' | 'text' | 'scale' | 'scaleWhite';
     size?: 'xsmall' | 'small' | 'medium' | 'large';
     disabled?: boolean;
     shape?: 'base' | 'circle';
-    bgColor?: 'base' | 'white' | 'primary';
+    bgColor?: 'base' | 'white' | 'primary' | 'transparent';
     children: React.ReactNode;
     title?: string;
     className?: string;

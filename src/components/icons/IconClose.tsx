@@ -10,7 +10,7 @@ export default function IconClose({
     plus?: boolean;
 }) {
     const fillColors = {
-        base: 'var(--decorative-base)',
+        base: 'var(--text-subdued)',
         primary: 'var(--color-primary)',
     };
     const sizes = {
