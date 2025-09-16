@@ -1,12 +1,12 @@
-export type InputProps = {
-    size?: 'small' | 'medium' | 'large';
+import type { InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
+
+export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> & {
+    uiSize?: 'small' | 'medium' | 'large';
     variant?: 'base' | 'text' | 'scale';
     disabled?: boolean;
     shape?: 'base' | 'circle';
     className?: string;
-    children?: React.ReactNode;
-    placeholder?: string;
-    id?: string;
-    type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search' | 'date' | 'time' | 'datetime-local' | 'month' | 'week';
-    name?: string;
+    children?: ReactNode;
+    clearable?: boolean; // show custom clear button when there is value
+    onClear?: (event: MouseEvent<HTMLButtonElement>) => void;
 };

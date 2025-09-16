@@ -1,5 +1,5 @@
 'use client';
-import IconPlay from '@/components/icons/IconPlay';
+import { IconPlay } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';

@@ -1,8 +1,8 @@
 'use client';
+import { IconArrow } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import IconArrow from '../icons/IconArrow';
 import { Button } from '../ui/Button/Button';
 import Card from '../ui/Card/Card';
 import { CardSectionProps } from './CardSection.type';
@@ -74,7 +74,7 @@ const CardSection = ({
         titleImg: "w-[48px] h-[48px] bg-[var(--background-base)] rounded-full overflow-hidden",
         titleDesc: "text-(--text-subdued) text-sm block",
         title: "text-2xl font-bold",
-        cardList: "grid grid-flow-col auto-cols-[195.5px] after:content-[''] after:w-6 after:snap-end",
+        cardList: "grid grid-flow-col",
         carouselsWrap: "relative group/slider",
         cardListWrap: "w-full overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide scroll-behavior-smooth px-6 scroll-px-6",
         sliderButtons: "absolute top-[50%] transform-[translateY(-50%)] z-[var(--z-index)] opacity-0 group-hover/slider:opacity-100 transition-opacity duration-300",
@@ -111,7 +111,7 @@ const CardSection = ({
                 <div ref={scrollContainerRef} className={cn(baseStyle.cardListWrap)}>
                     <ul className={cn(baseStyle.cardList)}>
                         {data.items.map((item) => (
-                            <li key={item.id} className="snap-start">
+                            <li key={item.id} className="snap-start last:pr-3">
                                 <Card
                                     profile={item.profile? item.profile : false}
                                     title={item.title}

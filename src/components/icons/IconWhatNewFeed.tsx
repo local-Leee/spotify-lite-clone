@@ -6,7 +6,7 @@ export default function IconWhatNewFeed({
     shape?: 'base' | 'active';
 }) {
     const fillColors = {
-        base: 'var(--decorative-base)',
+        base: 'var(--text-subdued)',
         primary: 'var(--color-primary)',
     };
     const sizes = '16';

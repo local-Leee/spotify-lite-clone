@@ -1,11 +1,7 @@
 'use client';
 import CardSection from '@/components/card/CardSection';
-import { Button } from '@/components/ui/Button/Button';
-import Card from '@/components/ui/Card/Card';
-import TabItem from '@/components/ui/Tab/TabItem';
-import TabList from '@/components/ui/Tab/TabList';
-import TabPanel from '@/components/ui/Tab/TabPanel';
-import { TabsProvider } from '@/components/ui/Tab/Tabs.context';
+
+import { Button, Card, TabItem, TabList, TabPanel, TabsProvider } from '@/components/ui';
 import CardSectionData from '@/data/cardSection.json';
 import type { PartialOptions } from 'overlayscrollbars';
 import type { OverlayScrollbarsComponentRef } from 'overlayscrollbars-react';

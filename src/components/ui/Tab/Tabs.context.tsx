@@ -31,3 +31,5 @@ export function TabsProvider({
     const value = useMemo(() => ({ active, setActive, register, ids }), [active, ids]);
     return <TabsCtx.Provider value={value}>{children}</TabsCtx.Provider>;
 }
+
+export default TabsProvider;

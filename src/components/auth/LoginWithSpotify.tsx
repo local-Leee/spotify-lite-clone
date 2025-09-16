@@ -1,12 +1,11 @@
 "use client";
+import { Button } from "../ui/Button/Button";
 
-export default function LoginWithSpotify() {
+
+export default function LoginWithSpotify({ className }: { className: string }) {
     return (
-        <button
-        className="px-3 py-2 rounded-lg bg-[var(--color-primary)] text-black font-semibold"
-        onClick={() => (window.location.href = "/api/auth/login")}
-        >
-            스포티파이로 로그인
-        </button>
+        <Button shape="circle" bgColor="white" variant="scaleWhite" size="medium" onClick={() => (window.location.href = "/api/auth/login")} className={className}>
+            로그인하기
+        </Button>
     );
 }
