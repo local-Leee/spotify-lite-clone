@@ -1,6 +1,5 @@
-import IconLibrary from '@/components/icons/IconLibrary';
-import IconPlus from '@/components/icons/IconPlus';
-import { Button } from '@/components/ui/Button/Button';
+import { IconLibrary, IconPlus } from '@/components/icons';
+import { Button } from '@/components/ui';
 import { cn } from '@/lib/utils';
 
 export default function MyLibrary({ id, className }: { id: string; className: string }) {
@@ -13,7 +12,7 @@ export default function MyLibrary({ id, className }: { id: string; className: st
             )}
         >
             <header className="flex items-center px-4 py-4">
-                <Button shape="base">
+                <Button shape="base" bgColor="transparent">
                     <IconLibrary shape="open" size="small" />
                     <h1 className="text-m font-bold pl-2">내 라이브러리</h1>
                 </Button>

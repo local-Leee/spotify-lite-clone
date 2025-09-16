@@ -1,8 +1,8 @@
 'use client';
+import { IconArrow } from '@/components/icons';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import IconArrow from '../icons/IconArrow';
 import { Button } from '../ui/Button/Button';
 import Card from '../ui/Card/Card';
 import { CardSectionProps } from './CardSection.type';
