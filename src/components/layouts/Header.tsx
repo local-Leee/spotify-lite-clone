@@ -5,7 +5,7 @@ import { Button, Input } from '@/components/ui';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import LoginWithSpotify from '../auth/LoginWithSpotify';
+import AuthStatus from '../auth/AuthStatus';
 
 
 export default function Header({ id, className }: { id: string; className: string }) {
@@ -154,7 +154,7 @@ export default function Header({ id, className }: { id: string; className: strin
                     </Button>
                 </div>
 
-                <LoginWithSpotify className="font-bold px-4" />
+                <AuthStatus className="font-bold flex-shrink-0" />
             </div>
         </header>
     );

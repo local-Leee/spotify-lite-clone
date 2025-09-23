@@ -1,5 +1,5 @@
 'use client';
-import CardSection from '@/components/card/CardSection';
+import CardSection from '@/components/composite/card/CardSection';
 
 import { Button, Card, TabItem, TabList, TabPanel, TabsProvider } from '@/components/ui';
 import CardSectionData from '@/data/cardSection.json';
