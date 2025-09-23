@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
         const codeVerifier = await generateCodeVerifier(128);
         const codeChallenge = await generateCodeChallenge(codeVerifier);
         const state = await generateCodeVerifier(16);
-        const scope = 'user-read-private user-read-email';
+        const scope = 'user-read-private user-read-email playlist-read-private user-library-read user-follow-read';
 
         // 요청 URL에 따라 동적으로 redirect URI 생성
         const url = new URL(req.url);

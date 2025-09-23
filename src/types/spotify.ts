@@ -29,3 +29,93 @@ export interface SpotifyAuthResponse {
   refresh_token?: string;
   scope: string;
 }
+
+export interface SpotifyPlaylist {
+  id: string;
+  name: string;
+  description: string;
+  images: Image[];
+  owner: {
+    display_name: string;
+    id: string;
+  };
+  tracks: {
+    total: number;
+  };
+  type: string;
+  uri: string;
+  external_urls: {
+    spotify: string;
+  };
+}
+
+export interface SpotifyPlaylistsResponse {
+  items: SpotifyPlaylist[];
+  total: number;
+  limit: number;
+  offset: number;
+}
+
+export interface SpotifyAlbum {
+  id: string;
+  name: string;
+  artists: {
+    id: string;
+    name: string;
+  }[];
+  images: Image[];
+  total_tracks: number;
+  type: string;
+  uri: string;
+  external_urls: {
+    spotify: string;
+  };
+}
+
+export interface SpotifyAlbumsResponse {
+  items: {
+    added_at: string;
+    album: SpotifyAlbum;
+  }[];
+  total: number;
+  limit: number;
+  offset: number;
+}
+
+export interface SpotifyArtist {
+  id: string;
+  name: string;
+  images: Image[];
+  followers: {
+    total: number;
+  };
+  genres: string[];
+  type: string;
+  uri: string;
+  external_urls: {
+    spotify: string;
+  };
+}
+
+export interface SpotifyArtistsResponse {
+  artists: {
+    items: SpotifyArtist[];
+    total: number;
+    limit: number;
+    offset: number;
+  };
+}
+
+export interface SpotifyFollowedArtistsResponse {
+  artists: {
+    items: SpotifyArtist[];
+    next: string | null;
+    total: number;
+    limit: number;
+    offset: number;
+    href: string;
+    cursors: {
+      after: string;
+    };
+  };
+}
