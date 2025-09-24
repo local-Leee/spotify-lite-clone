@@ -34,7 +34,7 @@ export default function IconLibrary({
             aria-hidden="true"
             width={sizes}
             height={sizes}
-            viewBox="0 0 24 24"
+            viewBox="0 0 16 16"
             style={{ fill: fillColors } as React.CSSProperties}
             className={cn(className)}
         >

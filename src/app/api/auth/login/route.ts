@@ -1,37 +1,57 @@
-// app/api/auth/login/route.ts
 import { generateCodeChallenge, generateCodeVerifier } from "@/lib/pkce";
 import { NextRequest, NextResponse } from "next/server";
 
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID!;
+
 export async function GET(req: NextRequest) {
-    const clientId = process.env.SPOTIFY_CLIENT_ID!;
-    const proto = req.headers.get("x-forwarded-proto") ?? "http";
-    const host = req.headers.get("host")!;
-    const redirectUri = `${proto}://${host}/api/callback`; // ← 현재 도메인 기준
+    try {
+        const codeVerifier = await generateCodeVerifier(128);
+        const codeChallenge = await generateCodeChallenge(codeVerifier);
+        const state = await generateCodeVerifier(16);
+        const scope = 'user-read-private user-read-email playlist-read-private user-library-read user-follow-read';
 
-    const scope = [
-        "user-read-email",
-        "user-read-private",
-        // 필요시 추가
-    ].join(" ");
+        // 요청 URL에 따라 동적으로 redirect URI 생성
+        const url = new URL(req.url);
+        const origin = url.origin;
+        // 로컬 환경에서 localhost로 접근했을 때 127.0.0.1로 변경
+        const redirectOrigin = origin.includes('localhost') 
+            ? origin.replace('localhost', '127.0.0.1')
+            : origin;
+        const redirectUri = `${redirectOrigin}/api/callback`;
 
-    const verifier = await generateCodeVerifier();
-    const challenge = await generateCodeChallenge(verifier);
-    const state = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+        const params = new URLSearchParams({
+            client_id: CLIENT_ID,
+            response_type: 'code',
+            redirect_uri: redirectUri,
+            scope,
+            code_challenge_method: 'S256',
+            code_challenge: codeChallenge,
+            state
+        });
 
-    const params = new URLSearchParams({
-        response_type: "code",
-        client_id: clientId,
-        redirect_uri: redirectUri,                 // ← 동적 값
-        scope,
-        code_challenge_method: "S256",
-        code_challenge: challenge,
-        state,
-    });
+        const authUrl = `https://accounts.spotify.com/authorize?${params.toString()}`;
+        
+        const response = NextResponse.redirect(authUrl);
+        
+        // 쿠키에 state와 code_verifier 저장
+        response.cookies.set('sp_state', state, { 
+            httpOnly: true, 
+            sameSite: 'lax', 
+            path: '/', 
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 600 // 10분
+        });
+        response.cookies.set('sp_cv', codeVerifier, { 
+            httpOnly: true, 
+            sameSite: 'lax', 
+            path: '/', 
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 600 // 10분
+        });
 
-    const res = NextResponse.redirect(`https://accounts.spotify.com/authorize?${params.toString()}`);
-    const secure = (proto === "https");
-    res.cookies.set("sp_cv", verifier, { httpOnly: true, secure, sameSite: "lax", path: "/", maxAge: 600 });
-    res.cookies.set("sp_state", state,   { httpOnly: true, secure, sameSite: "lax", path: "/", maxAge: 600 });
-    
-    return res;
+        return response;
+    } catch (error) {
+        console.error('Login error:', error);
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    }
 }

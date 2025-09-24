@@ -24,3 +24,15 @@ export async function generateCodeChallenge(verifier: string) {
     const hash = await crypto.subtle.digest("SHA-256", data);
     return base64UrlEncode(hash);
 }
+
+export const generateRandomString = (length: number) => {
+    // Node.js 환경에서만 사용
+    if (typeof require !== 'undefined') {
+        const crypto = require('crypto');
+        return crypto.randomBytes(60).toString("hex").slice(0, length);
+    }
+    // 웹 환경에서는 Web Crypto API 사용
+    const bytes = new Uint8Array(length);
+    crypto.getRandomValues(bytes);
+    return Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('').slice(0, length);
+}

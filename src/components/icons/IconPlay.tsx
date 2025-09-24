@@ -1,7 +1,8 @@
-export default function IconPlay({ size = 'base' }: { size?: 'base' | 'small' }) {
+export default function IconPlay({ size = 'base' }: { size?: 'base' | 'small' | 'medium' }) {
     const sizes = {
         base: '24',
         small: '16',
+        medium: '20',
     }[size];
     return (
         <svg

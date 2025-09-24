@@ -3,11 +3,16 @@ export { default as IconClose } from './IconClose';
 export { default as IconDownload } from './IconDownload';
 export { default as IconFriendActivity } from './IconFriendActivity';
 export { default as IconHome } from './IconHome';
+export { default as IconInvite } from './IconInvite';
 export { default as IconLibrary } from './IconLibrary';
 export { default as IconLogo } from './IconLogo';
+export { default as IconMore } from './IconMore';
 export { default as IconPlay } from './IconPlay';
 export { default as IconPlus } from './IconPlus';
 export { default as IconSearch } from './IconSearch';
+export { default as IconShuffle } from './IconShuffle';
+export { default as IconTime } from './IconTime';
 export { default as IconTrailing } from './IconTrailing';
 export { default as IconView } from './IconView';
 export { default as IconWhatNewFeed } from './IconWhatNewFeed';
+
