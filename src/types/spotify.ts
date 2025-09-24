@@ -171,3 +171,41 @@ export interface SpotifyPlaylistDetail extends SpotifyPlaylist {
   public: boolean;
   collaborative: boolean;
 }
+
+// 공통 라이브러리 아이템 인터페이스
+export interface LibraryItem {
+  id: string;
+  title: string;
+  artist: string;
+  image: string;
+  type: 'album' | 'playlist' | 'artist';
+}
+
+// API 응답 공통 타입
+export interface ApiResponse<T = any> {
+  data?: T;
+  error?: string;
+  message?: string;
+}
+
+// 페이지네이션 공통 타입
+export interface PaginatedResponse<T> {
+  items: T[];
+  total: number;
+  limit: number;
+  offset: number;
+  next?: string | null;
+  previous?: string | null;
+}
+
+// 로딩 상태 공통 타입
+export interface LoadingState {
+  loading: boolean;
+  error: string | null;
+}
+
+// 인증 상태 타입
+export interface AuthState extends LoadingState {
+  isAuthenticated: boolean;
+  user: UserProfile | null;
+}

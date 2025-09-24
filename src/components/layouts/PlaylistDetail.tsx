@@ -1,11 +1,15 @@
 "use client";
 import { IconMore, IconPlay, IconShuffle, IconTime } from '@/components/icons';
 import { Button } from '@/components/ui';
+import { useAuthRedirect } from '@/hooks/useAuthRedirect';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { useSpotifyPlaylist } from '@/hooks/useSpotifyPlaylist';
+import { playlistScrollbarOptions } from '@/lib/scrollbar-config';
 import { cn } from '@/lib/utils';
 import { SpotifyPlaylistTrack } from '@/types/spotify';
 import Image from 'next/image';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import 'overlayscrollbars/overlayscrollbars.css';
 import { useEffect, useRef, useState } from 'react';
 
 // 시간을 분:초 형식으로 변환하는 함수
@@ -135,8 +139,16 @@ interface PlaylistDetailProps {
 export default function PlaylistDetail({ playlistId, className }: PlaylistDetailProps) {
     const { playlist, loading, error } = useSpotifyPlaylist(playlistId);
     const { user } = useCurrentUser();
+    const { triggerAuthError } = useAuthRedirect();
     const [isScrolled, setIsScrolled] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
+
+    // 인증 오류 처리
+    useEffect(() => {
+        if (error && error.includes('인증')) {
+            triggerAuthError();
+        }
+    }, [error, triggerAuthError]);
 
     // 전체 곡의 총 시간 계산 (분 단위)
     const totalDurationMinutes = playlist?.tracks.items.reduce((total, item) => {
@@ -154,20 +166,33 @@ export default function PlaylistDetail({ playlistId, className }: PlaylistDetail
         return `약 ${totalMinutes}분`;
     };
 
-    // 스크롤 이벤트 처리
+    // 스크롤 이벤트 처리 (OverlayScrollbars용)
     useEffect(() => {
         const handleScroll = () => {
-            if (scrollRef.current) {
-                setIsScrolled(scrollRef.current.scrollTop > 0);
+            // OverlayScrollbars의 viewport 요소를 찾아서 스크롤 위치 확인
+            const osViewport = document.querySelector('.os-viewport');
+            if (osViewport) {
+                const scrollTop = osViewport.scrollTop;
+                setIsScrolled(scrollTop > 100);
             }
         };
 
-        const scrollElement = scrollRef.current;
-        if (scrollElement) {
-            scrollElement.addEventListener('scroll', handleScroll);
-            return () => scrollElement.removeEventListener('scroll', handleScroll);
-        }
-    }, []);
+        // 약간의 지연을 두고 OverlayScrollbars가 초기화된 후 이벤트 리스너 추가
+        const timer = setTimeout(() => {
+            const osViewport = document.querySelector('.os-viewport');
+            if (osViewport) {
+                osViewport.addEventListener('scroll', handleScroll);
+            }
+        }, 100);
+
+        return () => {
+            clearTimeout(timer);
+            const osViewport = document.querySelector('.os-viewport');
+            if (osViewport) {
+                osViewport.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, [playlist]);
 
     if (loading) {
         return (
@@ -202,13 +227,17 @@ export default function PlaylistDetail({ playlistId, className }: PlaylistDetail
         : '/placeholder-playlist.svg';
 
     return (
-        <div 
-            ref={scrollRef}
+        <OverlayScrollbarsComponent
+            options={playlistScrollbarOptions}
             className={cn(
-                "h-full bg-[var(--background-base)] rounded-lg overflow-y-auto scroll-smooth relative",
+                "h-full bg-[var(--background-base)] rounded-lg relative",
                 className
             )}
         >
+            <div 
+                ref={scrollRef}
+                className="h-full relative"
+            >
             {/* 헤더 배경 그라데이션 */}
             <div className="absolute top-0 left-0 w-full h-80 bg-gradient-to-b from-zinc-700 to-transparent"></div>
             
@@ -289,11 +318,11 @@ export default function PlaylistDetail({ playlistId, className }: PlaylistDetail
                 {/* 컨트롤 버튼들 */}
                 <div className="flex items-center gap-6 mb-6">
                     <Button
-                        size="large"
+                        size="medium"
                         shape="circle"
                         className="w-14 h-14 bg-green-500 hover:bg-green-400 text-black flex items-center justify-center hover:scale-105 transition-transform"
                     >
-                        <IconPlay size="medium" />
+                        <IconPlay />
                     </Button>
                     <Button
                         size="medium"
@@ -350,6 +379,7 @@ export default function PlaylistDetail({ playlistId, className }: PlaylistDetail
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
+        </OverlayScrollbarsComponent>
     );
 }

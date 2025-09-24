@@ -214,63 +214,158 @@
         --decorative-base: #fff;
         --decorative-subdued: #292929;
     }
+}
 
-    /* 2줄 말줄임 */
-    .text-ellipsis-2 {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        overflow: hidden;
-    }
+/* 2줄 말줄임 */
+.text-ellipsis-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+}
 
-    /* 배경 그라데이션 + 노이즈 */
-    .bg-gradient-noise {
-        background-image:
-            linear-gradient(rgba(0, 0, 0, 0.6) 0, var(--background-base) 100%),
-            var(--background-noise);
-        background-color: rgb(83, 83, 83);
-        background-repeat: no-repeat;
-        transition-property: background-color;
-        transition-duration: 1s;
-        transition-timing-function: ease;
-        z-index: -1;
-    }
+/* 배경 그라데이션 + 노이즈 */
+.bg-gradient-noise {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.6) 0, var(--background-base) 100%), var(--background-noise);
+    background-color: rgb(83, 83, 83);
+    background-repeat: no-repeat;
+    transition-property: background-color;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+    z-index: -1;
+}
 
-    .grid-layout {
-        display: grid;
-        grid-template-areas:
-            'global-nav global-nav global-nav'
-            'left-sidebar main-view main-view';
-        grid-template-columns: 420px 1fr;
-        grid-template-rows: var(--header-height) calc(100vh - var(--header-height));
-        column-gap: 8px;
-    }
+.grid-layout {
+    display: grid;
+    grid-template-areas:
+        'global-nav global-nav global-nav'
+        'left-sidebar main-view main-view';
+    grid-template-columns: 420px 1fr;
+    grid-template-rows: var(--header-height) calc(100vh - var(--header-height));
+    column-gap: 8px;
+}
 
-    .grid-global-nav {
-        grid-area: global-nav;
-    }
+.grid-global-nav {
+    grid-area: global-nav;
+}
 
-    .grid-left-sidebar {
-        grid-area: left-sidebar;
-    }
+.grid-left-sidebar {
+    grid-area: left-sidebar;
+}
 
-    .grid-main-view {
-        grid-area: main-view;
-    }
+.grid-main-view {
+    grid-area: main-view;
+}
 
-    /* 스크롤바 숨기기 */
-    .scrollbar-hide {
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
-    }
+/* 스크롤바 숨기기 */
+.scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
 
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none; /* Chrome, Safari and Opera */
-    }
+.scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
 
-    /* 스크롤 패딩 설정 */
-    .scroll-padding-left {
-        scroll-padding-left: 1.5rem; /* 24px */
-    }
+/* 스크롤 패딩 설정 */
+.scroll-padding-left {
+    scroll-padding-left: 1.5rem; /* 24px */
+}
+
+/* 커스텀 스크롤바 스타일 */
+.os-theme-dark > .os-scrollbar > .os-scrollbar-track,
+.os-theme-dark .os-scrollbar .os-scrollbar-track {
+    background: transparent !important;
+    border: none !important;
+}
+
+.os-theme-dark > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle,
+.os-theme-dark .os-scrollbar .os-scrollbar-track .os-scrollbar-handle {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-radius: 6px !important;
+    border: none !important;
+    min-height: 40px !important;
+}
+
+.os-theme-dark > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle:hover,
+.os-theme-dark .os-scrollbar .os-scrollbar-track .os-scrollbar-handle:hover {
+    background: rgba(255, 255, 255, 0.5) !important;
+}
+
+.os-theme-dark > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle:active,
+.os-theme-dark .os-scrollbar .os-scrollbar-track .os-scrollbar-handle:active {
+    background: rgba(255, 255, 255, 0.7) !important;
+}
+
+.os-theme-dark > .os-scrollbar-vertical,
+.os-theme-dark .os-scrollbar-vertical {
+    width: 12px !important;
+    right: 4px !important;
+}
+
+.os-theme-dark > .os-scrollbar-horizontal,
+.os-theme-dark .os-scrollbar-horizontal {
+    height: 12px !important;
+    bottom: 4px !important;
+}
+
+/* 기본 브라우저 스크롤바 완전히 숨기기 */
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+}
+
+*::-webkit-scrollbar-track {
+    display: none !important;
+}
+
+*::-webkit-scrollbar-thumb {
+    display: none !important;
+}
+
+/* OverlayScrollbars 컨테이너 */
+.os-host,
+.os-viewport,
+.os-content {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+.os-host::-webkit-scrollbar,
+.os-viewport::-webkit-scrollbar,
+.os-content::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* 메인 컨테이너들 */
+body,
+html,
+#main,
+#main-view,
+.grid-main-view,
+.grid-left-sidebar {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+body::-webkit-scrollbar,
+html::-webkit-scrollbar,
+#main::-webkit-scrollbar,
+#main-view::-webkit-scrollbar,
+.grid-main-view::-webkit-scrollbar,
+.grid-left-sidebar::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }

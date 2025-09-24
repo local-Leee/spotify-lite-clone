@@ -72,9 +72,11 @@ export const useSpotifyLibrary = (isLoggedIn: boolean) => {
                         firstItem: playlistsData?.items?.[0] || null,
                         rawData: playlistsData
                     });
-                } else if (playlistsResponse.status === 401) {
+                } else                 if (playlistsResponse.status === 401) {
                     console.log('useSpotifyLibrary: 플레이리스트 인증 만료');
                     setError('인증이 만료되었습니다.');
+                    // 인증 오류 이벤트 발생
+                    window.dispatchEvent(new CustomEvent('auth-error'));
                     return;
                 } else {
                     console.log('useSpotifyLibrary: 플레이리스트 요청 실패:', playlistsResponse.status);
@@ -89,9 +91,11 @@ export const useSpotifyLibrary = (isLoggedIn: boolean) => {
                         firstItem: albumsData?.items?.[0] || null,
                         rawData: albumsData
                     });
-                } else if (albumsResponse.status === 401) {
+                } else                 if (albumsResponse.status === 401) {
                     console.log('useSpotifyLibrary: 앨범 인증 만료');
                     setError('인증이 만료되었습니다.');
+                    // 인증 오류 이벤트 발생
+                    window.dispatchEvent(new CustomEvent('auth-error'));
                     return;
                 } else {
                     console.log('useSpotifyLibrary: 앨범 요청 실패:', albumsResponse.status);
@@ -106,9 +110,11 @@ export const useSpotifyLibrary = (isLoggedIn: boolean) => {
                         firstItem: followedArtistsData?.artists?.items?.[0] || null,
                         rawData: followedArtistsData
                     });
-                } else if (followedArtistsResponse.status === 401) {
+                } else                 if (followedArtistsResponse.status === 401) {
                     console.log('useSpotifyLibrary: 팔로우한 아티스트 인증 만료');
                     setError('인증이 만료되었습니다.');
+                    // 인증 오류 이벤트 발생
+                    window.dispatchEvent(new CustomEvent('auth-error'));
                     return;
                 } else {
                     console.log('useSpotifyLibrary: 팔로우한 아티스트 요청 실패:', followedArtistsResponse.status);

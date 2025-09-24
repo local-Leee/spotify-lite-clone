@@ -1,27 +1,16 @@
 "use client";
 import { IconLibrary, IconPlay, IconPlus } from '@/components/icons';
 import { Button } from '@/components/ui';
+import { useAuthRedirect } from '@/hooks/useAuthRedirect';
 import { useSpotifyLibrary } from '@/hooks/useSpotifyLibrary';
+import { libraryScrollbarOptions } from '@/lib/scrollbar-config';
 import { cn } from '@/lib/utils';
 import { SpotifyAlbum, SpotifyArtist, SpotifyPlaylist } from '@/types/spotify';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import type { PartialOptions } from 'overlayscrollbars';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'overlayscrollbars/overlayscrollbars.css';
 import { useEffect, useMemo, useState } from 'react';
-
-// 스크롤바 옵션
-const libraryScrollbarOptions: PartialOptions = {
-    scrollbars: {
-        autoHide: 'never',
-        theme: 'os-theme-dark',
-        visibility: 'visible',
-    },
-    overflow: {
-        x: 'hidden',
-    },
-};
 
 // 라이브러리 아이템 인터페이스
 interface LibraryItem {
@@ -121,6 +110,7 @@ function LibraryItemComponent({ item }: { item: LibraryItem }) {
 export default function MyLibrary({ id, className }: { id: string; className: string }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const { libraryData, loading, error } = useSpotifyLibrary(isLoggedIn);
+    const { triggerAuthError } = useAuthRedirect();
 
     // 사용자 로그인 상태 확인
     const checkLoginStatus = async () => {
@@ -141,6 +131,11 @@ export default function MyLibrary({ id, className }: { id: string; className: st
             }
             
             setIsLoggedIn(response.ok);
+            
+            // 401 오류 시 인증 오류 이벤트 발생
+            if (response.status === 401) {
+                triggerAuthError();
+            }
         } catch (error) {
             console.error('MyLibrary: 로그인 상태 확인 오류:', error);
             setIsLoggedIn(false);
@@ -180,6 +175,13 @@ export default function MyLibrary({ id, className }: { id: string; className: st
             document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
     }, []);
+
+    // 라이브러리 데이터 오류 처리
+    useEffect(() => {
+        if (error && error.includes('인증')) {
+            triggerAuthError();
+        }
+    }, [error, triggerAuthError]);
 
     // Spotify 플레이리스트를 LibraryItem 형태로 변환
     const convertPlaylistToLibraryItem = (playlist: SpotifyPlaylist): LibraryItem => {
@@ -261,7 +263,7 @@ export default function MyLibrary({ id, className }: { id: string; className: st
             id: 'liked',
             title: 'Liked Songs',
             artist: '좋아요 표시한 곡',
-            image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiBmaWxsPSIjMWVkNzYwIiByeD0iNCIvPgo8cGF0aCBkPSJNMjQgMzJMMTYgMjRIMzJMMjQgMzJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K',
+            image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8IS0tIOuwsOqyveyCsSDqt7jrnbzrlJTslrjtirgg7J2066Gc7J207KeAIC0tPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaWtlZEdyYWRpZW50IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzFlZDc2MDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMTViNjUzO3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgCiAgPCEtLSDrsJDqsr3tg5Ag7Iuc6rCB7ZiVIOuwsOqyveyCsSDqt7jrnbzrlJTslrjtirgvLS0+CiAgPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiBmaWxsPSJ1cmwoI2xpa2VkR3JhZGllbnQpIiByeD0iNCIvPgogIAogIDwhLS0g7Iqk7Y+s7Yuw7YyMIOuhnOqzoCAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMiwgMTIpIj4KICAgIDxzdmcgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9IndoaXRlIj4KICAgICAgPHBhdGggZD0iTTEzLjQyNy4wMUM2LjgwNS0uMjUzIDEuMjI0IDQuOTAyLjk2MSAxMS41MjQuNjk4IDE4LjE0NyA1Ljg1MyAyMy43MjggMTIuNDc2IDIzLjk5YzYuNjIyLjI2MyAxMi4yMDMtNC44OTIgMTIuNDY2LTExLjUxNFMyMC4wNDkuMjcyIDEzLjQyNy4wMW01LjA2NiAxNy41NzlhLjcxNy43MTcgMCAwIDEtLjk3Ny4yNjggMTQuNCAxNC40IDAgMCAwLTUuMTM4LTEuNzQ3IDE0LjQgMTQuNCAwIDAgMC01LjQyLjI2My43MTcuNzE3IDAgMCAxLS4zMzgtMS4zOTJjMS45NS0uNDc0IDMuOTU1LS41NzEgNS45NTgtLjI5IDIuMDAzLjI4MiAzLjkwMy45MjggNS42NDcgMS45MmEuNzE3LjcxNyAwIDAgMSAuMjY4Ljk3OG0xLjU3Ny0zLjE1YS45My45MyAwIDAgMS0xLjI2Mi4zNzYgMTcuNyAxNy43IDAgMCAwLTUuOTcyLTEuOTYgMTcuNyAxNy43IDAgMCAwLTYuMjgxLjIzOC45My45MyAwIDAgMS0xLjExLS43MS45My45MyAwIDAgMSAuNzEtMS4xMSAxOS41IDE5LjUgMCAwIDEgNi45NC0uMjYyIDE5LjUgMTkuNSAwIDAgMSA2LjU5OSAyLjE2NWMuNDUyLjI0NS42Mi44MS4zNzYgMS4yNjNtMS43NDgtMy41NTFhMS4xNDcgMS4xNDcgMCAwIDEtMS41NDYuNDg4IDIxLjQgMjEuNCAwIDAgMC02LjkxOC0yLjIwOCAyMS40IDIxLjQgMCAwIDAtNy4yNTkuMjE1IDEuMTQ2IDEuMTQ2IDAgMCAxLS40NTYtMi4yNDYgMjMuNyAyMy43IDAgMCAxIDguMDM0LS4yNCAyMy43IDIzLjcgMCAwIDEgNy42NTcgMi40NDVjLjU2MS4yOTIuNzguOTg0LjQ4OCAxLjU0NiIvPgogICAgPC9zdmc+CiAgPC9nPgo8L3N2Zz4K',
             type: 'playlist'
         });
 
@@ -324,7 +326,7 @@ export default function MyLibrary({ id, className }: { id: string; className: st
             )}
         >
             <header className="flex items-center px-4 py-4 flex-shrink-0">
-                <Button shape="base" bgColor="transparent">
+                <Button shape="base" bgColor="transparent" className="flex items-center">
                     <IconLibrary shape="open" size="small" />
                     <h1 className="text-m font-bold pl-2">내 라이브러리</h1>
                 </Button>

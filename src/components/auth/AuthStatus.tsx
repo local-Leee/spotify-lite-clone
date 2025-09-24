@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useAuthRedirect } from "../../hooks/useAuthRedirect";
 import { useUserDropdown } from "../../hooks/useUserDropdown";
 import { UserProfile } from "../../types/spotify";
 import { Button } from "../ui/Button/Button";
@@ -16,6 +17,7 @@ export default function AuthStatus({ className }: { className: string }) {
     const [error, setError] = useState<string | null>(null);
     const pathname = usePathname();
     const router = useRouter();
+    const { triggerAuthError } = useAuthRedirect();
     
     const { dropdownItems } = useUserDropdown({
         onLogout: () => {
@@ -48,6 +50,10 @@ export default function AuthStatus({ className }: { className: string }) {
                 } else if (response.status === 401) {
                     // 인증되지 않은 상태
                     setProfile(null);
+                    // 인증이 필요한 페이지에서 401 오류 시 메인으로 이동
+                    if (pathname.startsWith('/playlist/')) {
+                        triggerAuthError();
+                    }
                 } else {
                     throw new Error('프로필 데이터를 가져오는데 실패했습니다.');
                 }

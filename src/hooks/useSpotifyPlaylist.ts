@@ -34,6 +34,8 @@ export const useSpotifyPlaylist = (playlistId: string | null) => {
                 if (!response.ok) {
                     if (response.status === 401) {
                         setError('인증이 만료되었습니다.');
+                        // 인증 오류 이벤트 발생
+                        window.dispatchEvent(new CustomEvent('auth-error'));
                         return;
                     }
                     throw new Error(`플레이리스트를 가져올 수 없습니다: ${response.status}`);
