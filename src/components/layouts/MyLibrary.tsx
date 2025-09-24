@@ -5,6 +5,7 @@ import { useSpotifyLibrary } from '@/hooks/useSpotifyLibrary';
 import { cn } from '@/lib/utils';
 import { SpotifyAlbum, SpotifyArtist, SpotifyPlaylist } from '@/types/spotify';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
 // 라이브러리 아이템 인터페이스
@@ -18,6 +19,8 @@ interface LibraryItem {
 
 // 라이브러리 아이템 컴포넌트
 function LibraryItemComponent({ item }: { item: LibraryItem }) {
+    const router = useRouter();
+
     const handlePlayClick = (e: React.MouseEvent) => {
         e.stopPropagation(); // 전체 클릭 이벤트 방지
         console.log(`재생: ${item.title}`);
@@ -25,8 +28,30 @@ function LibraryItemComponent({ item }: { item: LibraryItem }) {
     };
 
     const handleItemClick = () => {
-        console.log(`페이지 이동: ${item.title}`);
-        // TODO: 페이지 이동 로직 구현
+        console.log(`페이지 이동: ${item.title} (${item.type})`);
+        
+        // 타입에 따라 다른 페이지로 이동
+        switch (item.type) {
+            case 'playlist':
+                if (item.id === 'liked') {
+                    // 좋아요 표시한 곡 페이지로 이동 (추후 구현)
+                    console.log('좋아요 표시한 곡 페이지로 이동');
+                } else {
+                    // 플레이리스트 상세 페이지로 이동
+                    router.push(`/playlist/${item.id}`);
+                }
+                break;
+            case 'album':
+                // 앨범 상세 페이지로 이동 (추후 구현)
+                console.log('앨범 페이지로 이동:', item.id);
+                break;
+            case 'artist':
+                // 아티스트 페이지로 이동 (추후 구현)
+                console.log('아티스트 페이지로 이동:', item.id);
+                break;
+            default:
+                console.log('알 수 없는 타입:', item.type);
+        }
     };
 
     return (
@@ -83,32 +108,62 @@ export default function MyLibrary({ id, className }: { id: string; className: st
     const { libraryData, loading, error } = useSpotifyLibrary(isLoggedIn);
 
     // 사용자 로그인 상태 확인
+    const checkLoginStatus = async () => {
+        try {
+            console.log('MyLibrary: 로그인 상태 확인 중...');
+            const response = await fetch('/api/me', {
+                credentials: 'include'
+            });
+            console.log('MyLibrary: /api/me 응답:', {
+                status: response.status,
+                ok: response.ok,
+                url: response.url
+            });
+            
+            if (response.ok) {
+                const userData = await response.json();
+                console.log('MyLibrary: 사용자 데이터:', userData);
+            }
+            
+            setIsLoggedIn(response.ok);
+        } catch (error) {
+            console.error('MyLibrary: 로그인 상태 확인 오류:', error);
+            setIsLoggedIn(false);
+        }
+    };
+
     useEffect(() => {
-        const checkLoginStatus = async () => {
-            try {
-                console.log('MyLibrary: 로그인 상태 확인 중...');
-                const response = await fetch('/api/me', {
-                    credentials: 'include'
-                });
-                console.log('MyLibrary: /api/me 응답:', {
-                    status: response.status,
-                    ok: response.ok,
-                    url: response.url
-                });
-                
-                if (response.ok) {
-                    const userData = await response.json();
-                    console.log('MyLibrary: 사용자 데이터:', userData);
-                }
-                
-                setIsLoggedIn(response.ok);
-            } catch (error) {
-                console.error('MyLibrary: 로그인 상태 확인 오류:', error);
-                setIsLoggedIn(false);
+        checkLoginStatus();
+    }, []);
+
+    // 로그아웃 이벤트 리스너 (즉시 상태 업데이트)
+    useEffect(() => {
+        const handleLogout = () => {
+            console.log('MyLibrary: 로그아웃 이벤트 감지');
+            setIsLoggedIn(false);
+        };
+
+        const handleFocus = () => {
+            checkLoginStatus();
+        };
+
+        const handleVisibilityChange = () => {
+            if (!document.hidden) {
+                checkLoginStatus();
             }
         };
 
-        checkLoginStatus();
+        // 커스텀 로그아웃 이벤트 리스너
+        window.addEventListener('spotify-logout', handleLogout);
+        // 페이지 포커스 이벤트 리스너
+        window.addEventListener('focus', handleFocus);
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        return () => {
+            window.removeEventListener('spotify-logout', handleLogout);
+            window.removeEventListener('focus', handleFocus);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
     }, []);
 
     // Spotify 플레이리스트를 LibraryItem 형태로 변환

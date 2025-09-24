@@ -4,6 +4,7 @@ import { IconFriendActivity, IconHome, IconLogo, IconSearch, IconTrailing, IconW
 import { Button, Input } from '@/components/ui';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import AuthStatus from '../auth/AuthStatus';
 
@@ -13,6 +14,10 @@ export default function Header({ id, className }: { id: string; className: strin
     const headerRef = useRef<HTMLElement>(null);
     const searchSectionRef = useRef<HTMLDivElement>(null);
     const rightSectionRef = useRef<HTMLDivElement>(null);
+    const pathname = usePathname();
+    
+    // 현재 페이지가 홈 페이지인지 확인
+    const isHomePage = pathname === '/';
 
     /**
      * 검색바와 오른쪽 컨텐츠 간의 충돌을 감지하여 레이아웃 모드를 결정
@@ -96,8 +101,15 @@ export default function Header({ id, className }: { id: string; className: strin
                     ref={searchSectionRef}
                     className="flex items-center gap-4 w-full"
                 >
-                    <Button shape="circle" variant="scale" className="flex-shrink-0">
-                        <IconHome active={true} />
+                    <Button 
+                        shape="circle" 
+                        variant="scale" 
+                        className="flex-shrink-0"
+                        asChild
+                    >
+                        <Link href="/">
+                            <IconHome active={isHomePage} />
+                        </Link>
                     </Button>
                     <form 
                         action="" 

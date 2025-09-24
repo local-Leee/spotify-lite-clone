@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useUserDropdown } from "../../hooks/useUserDropdown";
 import { UserProfile } from "../../types/spotify";
@@ -13,10 +14,23 @@ export default function AuthStatus({ className }: { className: string }) {
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const pathname = usePathname();
+    const router = useRouter();
+    
     const { dropdownItems } = useUserDropdown({
         onLogout: () => {
             setProfile(null);
-            window.location.reload();
+            
+            // 커스텀 로그아웃 이벤트 발생 (MyLibrary에서 감지)
+            window.dispatchEvent(new CustomEvent('spotify-logout'));
+            
+            // 플레이리스트 페이지에서 로그아웃하면 메인 페이지로 이동
+            if (pathname.startsWith('/playlist/')) {
+                router.push('/');
+            } else {
+                // 다른 페이지에서는 현재 페이지 새로고침
+                window.location.reload();
+            }
         }
     });
     

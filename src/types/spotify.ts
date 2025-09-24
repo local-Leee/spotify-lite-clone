@@ -119,3 +119,55 @@ export interface SpotifyFollowedArtistsResponse {
     };
   };
 }
+
+// 플레이리스트 트랙 관련 타입
+export interface SpotifyTrack {
+  id: string;
+  name: string;
+  artists: {
+    id: string;
+    name: string;
+  }[];
+  album: {
+    id: string;
+    name: string;
+    images: Image[];
+  };
+  duration_ms: number;
+  explicit: boolean;
+  preview_url: string | null;
+  track_number: number;
+  type: string;
+  uri: string;
+  external_urls: {
+    spotify: string;
+  };
+}
+
+export interface SpotifyPlaylistTrack {
+  added_at: string;
+  added_by: {
+    id: string;
+  };
+  is_local: boolean;
+  track: SpotifyTrack;
+}
+
+export interface SpotifyPlaylistTracksResponse {
+  items: SpotifyPlaylistTrack[];
+  total: number;
+  limit: number;
+  offset: number;
+  next: string | null;
+  previous: string | null;
+}
+
+// 플레이리스트 상세 정보 (트랙 포함)
+export interface SpotifyPlaylistDetail extends SpotifyPlaylist {
+  tracks: SpotifyPlaylistTracksResponse;
+  followers: {
+    total: number;
+  };
+  public: boolean;
+  collaborative: boolean;
+}

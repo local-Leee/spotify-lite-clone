@@ -4,7 +4,6 @@ import { cn } from '@/lib/utils';
 export default function IconArrow({
     left = false,
 }: {
-    fillColor?: 'base' | 'primary';
     left?: boolean;
 }) {
     const fillColors = 'var(--text-subdued)';
