@@ -6,7 +6,22 @@ import { cn } from '@/lib/utils';
 import { SpotifyAlbum, SpotifyArtist, SpotifyPlaylist } from '@/types/spotify';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import type { PartialOptions } from 'overlayscrollbars';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import 'overlayscrollbars/overlayscrollbars.css';
 import { useEffect, useMemo, useState } from 'react';
+
+// 스크롤바 옵션
+const libraryScrollbarOptions: PartialOptions = {
+    scrollbars: {
+        autoHide: 'never',
+        theme: 'os-theme-dark',
+        visibility: 'visible',
+    },
+    overflow: {
+        x: 'hidden',
+    },
+};
 
 // 라이브러리 아이템 인터페이스
 interface LibraryItem {
@@ -322,7 +337,10 @@ export default function MyLibrary({ id, className }: { id: string; className: st
             </header>
 
             {/* 라이브러리 아이템 목록 */}
-            <div className="flex-1 overflow-y-auto px-2">
+            <OverlayScrollbarsComponent
+                options={libraryScrollbarOptions}
+                className="flex-1 px-2"
+            >
         {/* 로그인되지 않은 경우 */}
         {!isLoggedIn && !loading && (
             <div className="p-6 flex flex-col items-center justify-center bg-zinc-900 rounded-lg mx-4 my-4">
@@ -398,7 +416,7 @@ export default function MyLibrary({ id, className }: { id: string; className: st
                </Button>
            </div>
        )}
-            </div>
+            </OverlayScrollbarsComponent>
         </nav>
     );
 }

@@ -239,7 +239,7 @@ export default function PlaylistDetail({ playlistId, className }: PlaylistDetail
 
             <div className="relative z-[1] px-6 pb-6">
                 {/* 플레이리스트 헤더 */}
-                <div className="flex items-end gap-6 pt-16 pb-6">
+                <div className="flex items-end gap-6 pt-10 pb-6">
                     {/* 플레이리스트 커버 이미지 */}
                     <div className="relative w-60 h-60 flex-shrink-0 shadow-2xl">
                         <Image
