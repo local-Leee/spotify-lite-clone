@@ -1,16 +1,20 @@
 import { cn } from '@/lib/utils';
 
+interface IconMoreProps {
+    size?: 'small' | 'medium' | 'large';
+    className?: string;
+}
 
-export default function IconMore() {
+export default function IconMore({ size = 'medium', className }: IconMoreProps) {
     const fillColors = 'var(--text-subdued)';
-    const size = '32';
+    const iconSize = size === 'small' ? '16' : size === 'large' ? '32' : '24';
     return (
         <svg 
             data-encore-id="icon" 
             role="img" aria-hidden="true" 
-            className={cn(fillColors)}
-            width={size}
-            height={size}
+            className={cn(fillColors, className)}
+            width={iconSize}
+            height={iconSize}
             viewBox="0 0 24 24" 
             style={{ "--encore-icon-height": "var(--encore-graphic-size-decorative-larger)", "--encore-icon-width": "var(--encore-graphic-size-decorative-larger)" } as React.CSSProperties}
         >
