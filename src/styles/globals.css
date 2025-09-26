@@ -22,8 +22,25 @@ body {
     color: var(--color-foreground);
 }
 
+.os-theme-dark {
+    --os-handle-bg: hsla(0, 0%, 100%, 0.3);
+    --os-handle-bg-hover: hsla(0, 0%, 100%, 0.5);
+    --os-handle-bg-active: hsla(0, 0%, 100%, 0.7);
+    --os-size: 12px;
+}
+.os-scrollbar-handle {
+    border-radius: 0 6px 6px 0;
+}
+#left-sidebar .os-scrollbar-handle {
+    border-radius: 0;
+}
+.os-scrollbar-vertical {
+    width: var(--os-size);
+    padding: 0;
+}
+
 /* 커스텀 스크롤바 스타일 */
-.os-theme-dark > .os-scrollbar > .os-scrollbar-track,
+/* .os-theme-dark > .os-scrollbar > .os-scrollbar-track,
 .os-theme-dark .os-scrollbar .os-scrollbar-track {
     background: transparent !important;
     border: none !important;
@@ -31,7 +48,7 @@ body {
 
 .os-theme-dark > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle,
 .os-theme-dark .os-scrollbar .os-scrollbar-track .os-scrollbar-handle {
-    background: rgba(255, 255, 255, 0.2) !important;
+    background: var(--os-handle-bg, pink) !important;
     border-radius: 6px !important;
     border: none !important;
     min-height: 40px !important;
@@ -40,16 +57,16 @@ body {
 
 .os-theme-dark > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle:hover,
 .os-theme-dark .os-scrollbar .os-scrollbar-track .os-scrollbar-handle:hover {
-    background: rgba(255, 255, 255, 0.4) !important;
+    background: var(--os-handle-bg-hover, rgba(255, 255, 255, 0.4)) !important;
 }
 
 .os-theme-dark > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle:active,
 .os-theme-dark .os-scrollbar .os-scrollbar-track .os-scrollbar-handle:active {
-    background: rgba(255, 255, 255, 0.6) !important;
-}
+    background: var(--os-handle-bg-active, rgba(255, 255, 255, 0.6)) !important;
+} */
 
 /* 스크롤바 크기 설정 - 12px */
-.os-theme-dark > .os-scrollbar-vertical,
+/* .os-theme-dark > .os-scrollbar-vertical,
 .os-theme-dark .os-scrollbar-vertical {
     width: 12px !important;
     right: 2px !important;
@@ -59,17 +76,12 @@ body {
 .os-theme-dark .os-scrollbar-horizontal {
     height: 12px !important;
     bottom: 2px !important;
-}
+} */
 
-/* 스크롤바 자동 숨김/표시 효과 - 마우스 오버 시에만 표시 */
+/* 스크롤바 항상 표시 */
 .os-theme-dark .os-scrollbar {
-    opacity: 0 !important;
-    transition: opacity 0.3s ease !important;
-}
-
-.os-host:hover .os-theme-dark .os-scrollbar,
-.os-theme-dark .os-scrollbar.os-scrollbar-visible {
     opacity: 1 !important;
+    transition: opacity 0.3s ease !important;
 }
 
 /* 기본 브라우저 스크롤바 완전히 숨기기 */

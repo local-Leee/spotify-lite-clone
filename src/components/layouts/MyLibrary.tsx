@@ -263,7 +263,7 @@ export default function MyLibrary({ id, className }: { id: string; className: st
             id: 'liked',
             title: 'Liked Songs',
             artist: '좋아요 표시한 곡',
-            image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8IS0tIOuwsOqyveyCsSDqt7jrnbzrlJTslrjtirgg7J2066Gc7J207KeAIC0tPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaWtlZEdyYWRpZW50IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzFlZDc2MDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMTViNjUzO3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgCiAgPCEtLSDrsJDqsr3tg5Ag7Iuc6rCB7ZiVIOuwsOqyveyCsSDqt7jrnbzrlJTslrjtirgvLS0+CiAgPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiBmaWxsPSJ1cmwoI2xpa2VkR3JhZGllbnQpIiByeD0iNCIvPgogIAogIDwhLS0g7Iqk7Y+s7Yuw7YyMIOuhnOqzoCAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMiwgMTIpIj4KICAgIDxzdmcgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9IndoaXRlIj4KICAgICAgPHBhdGggZD0iTTEzLjQyNy4wMUM2LjgwNS0uMjUzIDEuMjI0IDQuOTAyLjk2MSAxMS41MjQuNjk4IDE4LjE0NyA1Ljg1MyAyMy43MjggMTIuNDc2IDIzLjk5YzYuNjIyLjI2MyAxMi4yMDMtNC44OTIgMTIuNDY2LTExLjUxNFMyMC4wNDkuMjcyIDEzLjQyNy4wMW01LjA2NiAxNy41NzlhLjcxNy43MTcgMCAwIDEtLjk3Ny4yNjggMTQuNCAxNC40IDAgMCAwLTUuMTM4LTEuNzQ3IDE0LjQgMTQuNCAwIDAgMC01LjQyLjI2My43MTcuNzE3IDAgMCAxLS4zMzgtMS4zOTJjMS45NS0uNDc0IDMuOTU1LS41NzEgNS45NTgtLjI5IDIuMDAzLjI4MiAzLjkwMy45MjggNS42NDcgMS45MmEuNzE3LjcxNyAwIDAgMSAuMjY4Ljk3OG0xLjU3Ny0zLjE1YS45My45MyAwIDAgMS0xLjI2Mi4zNzYgMTcuNyAxNy43IDAgMCAwLTUuOTcyLTEuOTYgMTcuNyAxNy43IDAgMCAwLTYuMjgxLjIzOC45My45MyAwIDAgMS0xLjExLS43MS45My45MyAwIDAgMSAuNzEtMS4xMSAxOS41IDE5LjUgMCAwIDEgNi45NC0uMjYyIDE5LjUgMTkuNSAwIDAgMSA2LjU5OSAyLjE2NWMuNDUyLjI0NS42Mi44MS4zNzYgMS4yNjNtMS43NDgtMy41NTFhMS4xNDcgMS4xNDcgMCAwIDEtMS41NDYuNDg4IDIxLjQgMjEuNCAwIDAgMC02LjkxOC0yLjIwOCAyMS40IDIxLjQgMCAwIDAtNy4yNTkuMjE1IDEuMTQ2IDEuMTQ2IDAgMCAxLS40NTYtMi4yNDYgMjMuNyAyMy43IDAgMCAxIDguMDM0LS4yNCAyMy43IDIzLjcgMCAwIDEgNy42NTcgMi40NDVjLjU2MS4yOTIuNzguOTg0LjQ4OCAxLjU0NiIvPgogICAgPC9zdmc+CiAgPC9nPgo8L3N2Zz4K',
+            image: '/images/liked-songs-300.png',
             type: 'playlist'
         });
 
@@ -298,6 +298,7 @@ export default function MyLibrary({ id, className }: { id: string; className: st
             items.push(...artistItems);
         }
 
+
         return items;
     })();
 
@@ -321,7 +322,7 @@ export default function MyLibrary({ id, className }: { id: string; className: st
         <nav
             id={id}
             className={cn(
-                'w-[420px] bg-(--background-base) h-screen rounded-lg flex-shrink-0 flex flex-col',
+                'w-[420px] bg-[var(--background-base)] h-screen flex-shrink-0 flex flex-col',
                 className,
             )}
         >
@@ -339,10 +340,11 @@ export default function MyLibrary({ id, className }: { id: string; className: st
             </header>
 
             {/* 라이브러리 아이템 목록 */}
-            <OverlayScrollbarsComponent
-                options={libraryScrollbarOptions}
-                className="flex-1 px-2"
-            >
+            <div className="flex-1 overflow-hidden">
+                <OverlayScrollbarsComponent
+                    options={libraryScrollbarOptions}
+                    className="h-full px-2"
+                >
         {/* 로그인되지 않은 경우 */}
         {!isLoggedIn && !loading && (
             <div className="p-6 flex flex-col items-center justify-center bg-zinc-900 rounded-lg mx-4 my-4">
@@ -418,7 +420,8 @@ export default function MyLibrary({ id, className }: { id: string; className: st
                </Button>
            </div>
        )}
-            </OverlayScrollbarsComponent>
+                </OverlayScrollbarsComponent>
+            </div>
         </nav>
     );
 }

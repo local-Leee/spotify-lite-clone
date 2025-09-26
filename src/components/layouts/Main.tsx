@@ -16,7 +16,7 @@ export default function Main() {
     return (
         <div 
             data-encore-id="home"
-            className="h-full relative"
+            className=" relative"
         >
             <div className="absolute top-0 left-0 w-full h-[256px] bg-gradient-noise"></div>
             <TabsProvider defaultValue="all">
@@ -26,10 +26,10 @@ export default function Main() {
                     <TabItem id="podcast">팟캐스트</TabItem>
                 </TabList>
                 <TabPanel id="all" when="all" className="px-0 z-[--z-index]">                  
-                  <CardSection data={CardSectionData} /> 
+                    <CardSection data={CardSectionData} /> 
                 </TabPanel>
                 <TabPanel id="music" when="music" className="px-0 z-[var(--z-index)]">
-                  <CardSection data={CardSectionData} /> 
+                    <CardSection data={CardSectionData} /> 
                 </TabPanel>
             </TabsProvider>
             <div className="sr-only">

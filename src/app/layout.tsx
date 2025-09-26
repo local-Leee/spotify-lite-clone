@@ -11,5 +11,11 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    return <RootLayoutClient>{children}</RootLayoutClient>;
+    return (
+        <html lang="ko">
+            <body>
+                <RootLayoutClient>{children}</RootLayoutClient>
+            </body>
+        </html>
+    );
 }

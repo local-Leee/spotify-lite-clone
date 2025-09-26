@@ -5,11 +5,11 @@ import type { PartialOptions } from 'overlayscrollbars';
  */
 export const commonScrollbarOptions: PartialOptions = {
     scrollbars: {
-        autoHide: 'move',
-        autoHideDelay: 800,
+        autoHide: 'never',
+        autoHideDelay: 0,
         autoHideSuspend: false,
         theme: 'os-theme-dark',
-        visibility: 'auto',
+        visibility: 'visible',
     },
     overflow: {
         x: 'hidden',

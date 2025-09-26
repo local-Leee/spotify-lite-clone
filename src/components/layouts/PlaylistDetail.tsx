@@ -4,12 +4,10 @@ import { Button } from '@/components/ui';
 import { useAuthRedirect } from '@/hooks/useAuthRedirect';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { useSpotifyPlaylist } from '@/hooks/useSpotifyPlaylist';
-import { playlistScrollbarOptions } from '@/lib/scrollbar-config';
 import { cn } from '@/lib/utils';
 import { SpotifyPlaylistTrack } from '@/types/spotify';
 import Image from 'next/image';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import 'overlayscrollbars/overlayscrollbars.css';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 // 시간을 분:초 형식으로 변환하는 함수
@@ -142,6 +140,18 @@ export default function PlaylistDetail({ playlistId, className }: PlaylistDetail
     const { triggerAuthError } = useAuthRedirect();
     const [isScrolled, setIsScrolled] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const lastScrollTop = useRef(0);
+    const pathname = usePathname();
+    
+    
+    // 컴포넌트가 언마운트될 때 스크롤 상태 리셋
+    useEffect(() => {
+        return () => {
+            // 페이지를 떠날 때 스크롤 상태 리셋
+            setIsScrolled(false);
+            lastScrollTop.current = 0;
+        };
+    }, [pathname]);
 
     // 인증 오류 처리
     useEffect(() => {
@@ -149,6 +159,43 @@ export default function PlaylistDetail({ playlistId, className }: PlaylistDetail
             triggerAuthError();
         }
     }, [error, triggerAuthError]);
+
+    // 상위 레이아웃의 스크롤 이벤트 처리 (커스텀 이벤트 사용)
+    useEffect(() => {
+        const handlePlaylistScroll = (event: CustomEvent) => {
+            const scrollTop = event.detail.scrollTop;
+            
+            
+            // 플레이리스트 헤더 영역의 높이를 더 정확하게 계산
+            const showThreshold = 300; // 헤더를 보여주는 임계값
+            const hideThreshold = 250; // 헤더를 숨기는 임계값 (하이스테리시스)
+            
+            // 스크롤 방향 감지
+            const isScrollingDown = scrollTop > lastScrollTop.current;
+            lastScrollTop.current = scrollTop;
+            
+            // 하이스테리시스 로직으로 헤더 표시/숨김 결정
+            let shouldShowHeader = isScrolled;
+            
+            if (!isScrolled && scrollTop > showThreshold) {
+                // 헤더가 숨겨진 상태에서 임계값을 넘으면 표시
+                shouldShowHeader = true;
+            } else if (isScrolled && scrollTop < hideThreshold) {
+                // 헤더가 표시된 상태에서 임계값 아래로 내려가면 숨김
+                shouldShowHeader = false;
+            }
+            
+            // 상태 업데이트
+            setIsScrolled(shouldShowHeader);
+        };
+
+        // 커스텀 스크롤 이벤트 리스너 추가
+        window.addEventListener('playlist-scroll', handlePlaylistScroll as EventListener);
+
+        return () => {
+            window.removeEventListener('playlist-scroll', handlePlaylistScroll as EventListener);
+        };
+    }, [playlist]);
 
     // 전체 곡의 총 시간 계산 (분 단위)
     const totalDurationMinutes = playlist?.tracks.items.reduce((total, item) => {
@@ -166,33 +213,6 @@ export default function PlaylistDetail({ playlistId, className }: PlaylistDetail
         return `약 ${totalMinutes}분`;
     };
 
-    // 스크롤 이벤트 처리 (OverlayScrollbars용)
-    useEffect(() => {
-        const handleScroll = () => {
-            // OverlayScrollbars의 viewport 요소를 찾아서 스크롤 위치 확인
-            const osViewport = document.querySelector('.os-viewport');
-            if (osViewport) {
-                const scrollTop = osViewport.scrollTop;
-                setIsScrolled(scrollTop > 100);
-            }
-        };
-
-        // 약간의 지연을 두고 OverlayScrollbars가 초기화된 후 이벤트 리스너 추가
-        const timer = setTimeout(() => {
-            const osViewport = document.querySelector('.os-viewport');
-            if (osViewport) {
-                osViewport.addEventListener('scroll', handleScroll);
-            }
-        }, 100);
-
-        return () => {
-            clearTimeout(timer);
-            const osViewport = document.querySelector('.os-viewport');
-            if (osViewport) {
-                osViewport.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, [playlist]);
 
     if (loading) {
         return (
@@ -227,43 +247,37 @@ export default function PlaylistDetail({ playlistId, className }: PlaylistDetail
         : '/placeholder-playlist.svg';
 
     return (
-        <OverlayScrollbarsComponent
-            options={playlistScrollbarOptions}
+        <div 
+            ref={scrollRef}
             className={cn(
-                "h-full bg-[var(--background-base)] rounded-lg relative",
+                "bg-[var(--background-base)] relative",
                 className
             )}
         >
-            <div 
-                ref={scrollRef}
-                className="h-full relative"
-            >
             {/* 헤더 배경 그라데이션 */}
             <div className="absolute top-0 left-0 w-full h-80 bg-gradient-to-b from-zinc-700 to-transparent"></div>
             
-            {/* 상단 헤더 (스크롤 시 고정) */}
+            {/* 상단 헤더 (트랙 리스트 영역에서만 sticky로 표시) */}
             <div className={cn(
-                "sticky top-0 z-10 transition-all duration-300",
+                "sticky top-0 z-20 transition-all duration-300",
                 isScrolled ? "bg-zinc-900/95 backdrop-blur-sm" : "bg-transparent"
             )}>
-                <div className="flex items-center gap-4 p-4">
-                    {isScrolled && (
-                        <>
-                            <Button
-                                size="large"
-                                shape="circle"
-                                className="w-14 h-14 bg-green-500 hover:bg-green-400 text-black flex items-center justify-center"
-                            >
-                                <IconPlay size="medium" />
-                            </Button>
-                            <div>
-                                <h1 className="text-white text-xl font-bold truncate">
-                                    {playlist.name}
-                                </h1>
-                            </div>
-                        </>
-                    )}
-                </div>
+                {isScrolled && (
+                    <div className="flex items-center gap-4 p-4">
+                        <Button
+                            size="medium"
+                            shape="circle"
+                            className="w-8 h-8 bg-green-500 hover:bg-green-400 text-black flex items-center justify-center"
+                        >
+                            <IconPlay size="medium" />
+                        </Button>
+                        <div>
+                            <h1 className="text-white text-xl font-bold truncate">
+                                {playlist.name} 
+                            </h1>
+                        </div>
+                    </div>
+                )}
             </div>
 
             <div className="relative z-[1] px-6 pb-6">
@@ -341,7 +355,10 @@ export default function PlaylistDetail({ playlistId, className }: PlaylistDetail
                 </div>
 
                 {/* 트랙 리스트 헤더 */}
-                <div className="grid grid-cols-[16px_1fr_1fr_1fr_60px] gap-4 px-4 py-2 border-b border-zinc-800 mb-2">
+                <div className={cn(
+                    "sticky z-[5] bg-[var(--background-base)] grid grid-cols-[16px_1fr_1fr_1fr_60px] gap-4 px-4 py-2 border-b border-zinc-800 mb-2",
+                    isScrolled ? "top-[88px]" : "top-0"
+                )}>
                     <div className="text-zinc-400 text-sm">#</div>
                     <div className="text-zinc-400 text-sm">제목</div>
                     <div className="text-zinc-400 text-sm">앨범</div>
@@ -379,7 +396,6 @@ export default function PlaylistDetail({ playlistId, className }: PlaylistDetail
                     </div>
                 </div>
             </div>
-            </div>
-        </OverlayScrollbarsComponent>
+        </div>
     );
 }

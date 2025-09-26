@@ -11,6 +11,7 @@ export { default as IconPlay } from './IconPlay';
 export { default as IconPlus } from './IconPlus';
 export { default as IconSearch } from './IconSearch';
 export { default as IconShuffle } from './IconShuffle';
+export { default as IconSNS } from './IconSNS';
 export { default as IconTime } from './IconTime';
 export { default as IconTrailing } from './IconTrailing';
 export { default as IconView } from './IconView';
