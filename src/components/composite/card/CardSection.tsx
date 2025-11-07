@@ -78,7 +78,7 @@ const CardSection = ({
         cardListItem: "snap-start last:pr-3",
         carouselsWrap: "relative group/slider",
         cardListWrap: "w-full overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide scroll-behavior-smooth px-6 scroll-px-6",
-        sliderButtons: "absolute top-[50%] transform-[translateY(-50%)] z-[var(--z-index)] opacity-0 group-hover/slider:opacity-100 transition-opacity duration-300",
+        sliderButtons: "absolute top-[50%] transform-[translateY(-50%)] z-[var(--z-index)] transition-opacity duration-300",
         sliderButtonLeft: "left-4",
         sliderButtonRight: "right-4",
         sliderGradient: "absolute top-0 bottom-0 w-40 bg-gradient-to-r from-[var(--background-base)]/80 to-transparent z-[var(--z-index)] pointer-events-none",
@@ -126,30 +126,30 @@ const CardSection = ({
                     </ul>
                 </div>
                 {canScrollLeft && (
-                    <div className={cn(baseStyle.sliderGradient, baseStyle.sliderGradientLeft)} />
-                )}
-                {canScrollRight && (
-                    <div className={cn(baseStyle.sliderGradient, baseStyle.sliderGradientRight)} />
-                )}
-                {canScrollLeft && (
-                    <Button 
-                        shape="circle" 
-                        className={cn(baseStyle.sliderButtons, baseStyle.sliderButtonLeft)} 
-                        size="small"
-                        onClick={scrollLeft}
-                    >
-                        <IconArrow left={true} />
-                    </Button>
+                    <>
+                        <div className={cn(baseStyle.sliderGradient, baseStyle.sliderGradientLeft)} />
+                        <Button 
+                            shape="circle" 
+                            className={cn(baseStyle.sliderButtons, baseStyle.sliderButtonLeft)} 
+                            size="small"
+                            onClick={scrollLeft}
+                        >
+                            <IconArrow left={true} />
+                        </Button>
+                    </>
                 )}                
                 {canScrollRight && (
-                    <Button 
-                        shape="circle" 
-                        className={cn(baseStyle.sliderButtons, baseStyle.sliderButtonRight)} 
-                        size="small"
-                        onClick={scrollRight}
-                    >
-                        <IconArrow />
-                    </Button>
+                    <>
+                        <div className={cn(baseStyle.sliderGradient, baseStyle.sliderGradientRight)} />
+                        <Button 
+                            shape="circle" 
+                            className={cn(baseStyle.sliderButtons, baseStyle.sliderButtonRight)} 
+                            size="small"
+                            onClick={scrollRight}
+                        >
+                            <IconArrow />
+                        </Button>
+                    </>
                 )}
             </div>
         </section>

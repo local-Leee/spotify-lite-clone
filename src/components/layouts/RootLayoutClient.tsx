@@ -65,7 +65,7 @@ export default function RootLayoutClient({ children }: RootLayoutClientProps) {
             <div id="main" className={CSS_CLASSES.GRID_LAYOUT}>
                 <Header id="global-nav" className={CSS_CLASSES.GRID_GLOBAL_NAV} />
                 <MyLibrary id="left-sidebar" className={CSS_CLASSES.GRID_LEFT_SIDEBAR} />
-                <main id="main-view" className="h-full">
+                <main id="main-view" className="h-full overflow-hidden">
                     <div className={cn(
                         CSS_CLASSES.GRID_MAIN_VIEW,
                         CSS_CLASSES.H_FULL,
@@ -88,10 +88,12 @@ export default function RootLayoutClient({ children }: RootLayoutClientProps) {
                                     window.dispatchEvent(customEvent);
                                 }
                             }}
-                            className="h-full overflow-hidden"
+                            className="h-full overflow-hidden w-full"
                         >
-                                {children}
-                                <Footer />
+                                <div className="w-full">
+                                    {children}
+                                    <Footer />
+                                </div>
                         </OverlayScrollbarsComponent>
                     </div>
                 </main>

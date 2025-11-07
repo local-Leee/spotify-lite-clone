@@ -1,5 +1,6 @@
-export default function IconClose({
+export default function IconView({
     fillColor = 'base',
+    size = 'base',
     shape = 'grid',
 }: {
     fillColor?: 'base' | 'primary';

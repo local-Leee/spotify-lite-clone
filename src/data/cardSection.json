@@ -110,6 +110,33 @@
                 { "href": "/", "label": "종횬" },
                 { "href": "/", "label": "민호호" }
             ]
+        },
+        {
+            "id": 9,
+            "profile": false,
+            "title": "KPop Demon Hunters (Soundtrack from the Netflix Film)",
+            "links": [
+                { "href": "/", "label": "루미" },
+                { "href": "/", "label": "진우" },
+                { "href": "/", "label": "헌트릭스" },
+                { "href": "/", "label": "사자보이즈" },
+                { "href": "/", "label": "아이브" },
+                { "href": "/", "label": "KEY" },
+                { "href": "/", "label": "태민" },
+                { "href": "/", "label": "믹스" }
+            ]
+        },
+        {
+            "id": 10,
+            "profile": false,
+            "title": "어드바이스",
+            "links": [
+                { "href": "/", "label": "샤이니" },
+                { "href": "/", "label": "태민" },
+                { "href": "/", "label": "기범" },
+                { "href": "/", "label": "종횬" },
+                { "href": "/", "label": "민호호" }
+            ]
         }
     ]
 }

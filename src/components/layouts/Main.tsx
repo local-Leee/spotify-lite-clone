@@ -25,10 +25,10 @@ export default function Main() {
                     <TabItem id="music">음악</TabItem>
                     <TabItem id="podcast">팟캐스트</TabItem>
                 </TabList>
-                <TabPanel id="all" when="all" className="px-0 z-[--z-index]">                  
+                <TabPanel id="all" when="all" className="px-0">                  
                     <CardSection data={CardSectionData} /> 
                 </TabPanel>
-                <TabPanel id="music" when="music" className="px-0 z-[var(--z-index)]">
+                <TabPanel id="music" when="music" className="px-0">
                     <CardSection data={CardSectionData} /> 
                 </TabPanel>
             </TabsProvider>

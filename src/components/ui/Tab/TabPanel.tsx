@@ -13,7 +13,7 @@ const TabPanel = ({ id, when, children, className }: TabPanelProps) => {
             data-tabpanel-id={id}
             role="tabpanel"
             aria-labelledby={id}
-            className={cn('px-4 text-sm', className)}
+            className={cn('w-full px-4 text-sm', className)}
         >
             {children}
         </section>

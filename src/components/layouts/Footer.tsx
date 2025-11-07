@@ -71,7 +71,7 @@ export default function Footer({ className }: { className?: string }) {
                     {/* 푸터 링크 섹션들 */}
                     {footerSections.map((section, index) => (
                         <div key={index} className="space-y-4">
-                            <h3 className="text-white font-bold text-base">
+                            <h3 className="text-white font-bold text-base md:mt-8">
                                 {section.title}
                             </h3>
                             <ul className="space-y-2">
@@ -98,31 +98,33 @@ export default function Footer({ className }: { className?: string }) {
                     ))}
 
                     {/* SNS 아이콘 섹션 */}
-                    <div className="flex items-start justify-end space-x-4 lg:col-span-1">
-                        <Button
-                            size="medium"
-                            shape="circle"
-                            className="bg-zinc-800 hover:bg-zinc-700 text-white"
-                            title="Instagram"
-                        >
-                            <IconSNS shape="instagram" className="text-white" />
-                        </Button>
-                        <Button
-                            size="medium"
-                            shape="circle"
-                            className="bg-zinc-800 hover:bg-zinc-700 text-white"
-                            title="Twitter"
-                        >
-                            <IconSNS shape="twitter" className="text-white" />
-                        </Button>
-                        <Button
-                            size="medium"
-                            shape="circle"
-                            className="bg-zinc-800 hover:bg-zinc-700 text-white"
-                            title="Facebook"
-                        >
-                            <IconSNS shape="facebook" className="text-white" />
-                        </Button>
+                    <div className="space-x-4">
+                        <div className="flex flex-wrap gap-2 md:mt-8">
+                            <Button
+                                size="medium"
+                                shape="circle"
+                                className="bg-zinc-800 hover:bg-zinc-700 text-white"
+                                title="Instagram"
+                            >
+                                <IconSNS shape="instagram" className="text-white" />
+                            </Button>
+                            <Button
+                                size="medium"
+                                shape="circle"
+                                className="bg-zinc-800 hover:bg-zinc-700 text-white"
+                                title="Twitter"
+                            >
+                                <IconSNS shape="twitter" className="text-white" />
+                            </Button>
+                            <Button
+                                size="medium"
+                                shape="circle"
+                                className="bg-zinc-800 hover:bg-zinc-700 text-white"
+                                title="Facebook"
+                            >
+                                <IconSNS shape="facebook" className="text-white" />
+                            </Button>
+                        </div>
                     </div>
                 </div>
 
