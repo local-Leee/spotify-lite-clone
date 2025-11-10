@@ -345,81 +345,81 @@ export default function MyLibrary({ id, className }: { id: string; className: st
                     options={libraryScrollbarOptions}
                     className="h-full px-2"
                 >
-        {/* 로그인되지 않은 경우 */}
-        {!isLoggedIn && !loading && (
-            <div className="p-6 flex flex-col items-center justify-center bg-zinc-900 rounded-lg mx-4 my-4">
-                <div className="text-white text-lg font-semibold mb-2">
-                    첫 번째 플레이리스트를 만드세요.
-                </div>
-                <div className="text-zinc-400 text-sm mb-6">
-                    어렵지 않아요. 저희가 도와드릴게요.
-                </div>
-                <Button
-                    variant="base"
-                    size="medium"
-                    bgColor="white"
-                    className="px-6 py-3 text-sm font-semibold rounded-full hover:scale-105 transition-transform"
-                    onClick={() => {
-                        console.log('로그인으로 이동');
-                        // 로그인 페이지로 이동
-                        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-                        const loginUrl = isLocal 
-                            ? 'https://127.0.0.1:3000/api/auth/login'
-                            : '/api/auth/login';
-                        window.location.href = loginUrl;
-                    }}
-                >
-                    플레이리스트 만들기
-                </Button>
-            </div>
-        )}
+                    {/* 로그인되지 않은 경우 */}
+                    {!isLoggedIn && !loading && (
+                        <div className="p-6 flex flex-col items-center justify-center bg-zinc-900 rounded-lg mx-4 my-4">
+                            <div className="text-white text-lg font-semibold mb-2">
+                                첫 번째 플레이리스트를 만드세요.
+                            </div>
+                            <div className="text-zinc-400 text-sm mb-6">
+                                어렵지 않아요. 저희가 도와드릴게요.
+                            </div>
+                            <Button
+                                variant="base"
+                                size="medium"
+                                bgColor="white"
+                                className="px-6 py-3 text-sm font-semibold rounded-full hover:scale-105 transition-transform"
+                                onClick={() => {
+                                    console.log('로그인으로 이동');
+                                    // 로그인 페이지로 이동
+                                    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                                    const loginUrl = isLocal 
+                                        ? 'https://127.0.0.1:3000/api/auth/login'
+                                        : '/api/auth/login';
+                                    window.location.href = loginUrl;
+                                }}
+                            >
+                                플레이리스트 만들기
+                            </Button>
+                        </div>
+                    )}
 
-                {/* 로딩 상태 */}
-                {loading && isLoggedIn && (
-                    <div className="flex items-center justify-center p-4">
-                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-green-500"></div>
-                        <span className="ml-2 text-zinc-400 text-sm">라이브러리 로딩 중...</span>
-                    </div>
-                )}
-                
-                {/* 에러 상태 */}
-                {error && (
-                    <div className="p-4 text-red-400 text-sm">
-                        {error}
-                    </div>
-                )}
+                            {/* 로딩 상태 */}
+                            {loading && isLoggedIn && (
+                                <div className="flex items-center justify-center p-4">
+                                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-green-500"></div>
+                                    <span className="ml-2 text-zinc-400 text-sm">라이브러리 로딩 중...</span>
+                                </div>
+                            )}
+                            
+                            {/* 에러 상태 */}
+                            {error && (
+                                <div className="p-4 text-red-400 text-sm">
+                                    {error}
+                                </div>
+                            )}
 
-                {/* 라이브러리 아이템들 (로그인된 경우에만) */}
-                {!loading && isLoggedIn && libraryItems.length > 0 && (
-                    libraryItems.map((item) => (
-                        <LibraryItemComponent key={item.id} item={item} />
-                    ))
-                )}
+                            {/* 라이브러리 아이템들 (로그인된 경우에만) */}
+                            {!loading && isLoggedIn && libraryItems.length > 0 && (
+                                libraryItems.map((item) => (
+                                    <LibraryItemComponent key={item.id} item={item} />
+                                ))
+                            )}
 
-       {/* 로그인되었지만 Spotify 데이터가 비어있는 경우 */}
-       {!loading && isLoggedIn && !error && !hasSpotifyData && (
-           <div className="p-6 flex flex-col items-center justify-center bg-zinc-900 rounded-lg mx-4 my-4">
-               <div className="text-white text-lg font-semibold mb-2">
-                   첫 번째 플레이리스트를 만드세요.
-               </div>
-               <div className="text-zinc-400 text-sm mb-6">
-                   어렵지 않아요. 저희가 도와드릴게요.
-               </div>
-               <Button
-                   variant="base"
-                   size="medium"
-                   bgColor="white"
-                   className="px-6 py-3 text-sm font-semibold rounded-full hover:scale-105 transition-transform"
-                   onClick={() => {
-                       console.log('Spotify에서 플레이리스트 만들기');
-                       // Spotify 웹사이트의 플레이리스트 생성 페이지로 이동
-                       window.open('https://open.spotify.com/', '_blank');
-                   }}
-               >
-                   Spotify에서 만들기
-               </Button>
-           </div>
-       )}
+                    {/* 로그인되었지만 Spotify 데이터가 비어있는 경우 */}
+                    {!loading && isLoggedIn && !error && !hasSpotifyData && (
+                        <div className="p-6 flex flex-col items-center justify-center bg-zinc-900 rounded-lg mx-4 my-4">
+                            <div className="text-white text-lg font-semibold mb-2">
+                                첫 번째 플레이리스트를 만드세요.
+                            </div>
+                            <div className="text-zinc-400 text-sm mb-6">
+                                어렵지 않아요. 저희가 도와드릴게요.
+                            </div>
+                            <Button
+                                variant="base"
+                                size="medium"
+                                bgColor="white"
+                                className="px-6 py-3 text-sm font-semibold rounded-full hover:scale-105 transition-transform"
+                                onClick={() => {
+                                    console.log('Spotify에서 플레이리스트 만들기');
+                                    // Spotify 웹사이트의 플레이리스트 생성 페이지로 이동
+                                    window.open('https://open.spotify.com/', '_blank');
+                                }}
+                            >
+                                Spotify에서 만들기
+                            </Button>
+                        </div>
+                    )}
                 </OverlayScrollbarsComponent>
             </div>
         </nav>

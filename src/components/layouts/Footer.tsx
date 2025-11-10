@@ -99,7 +99,7 @@ export default function Footer({ className }: { className?: string }) {
 
                     {/* SNS 아이콘 섹션 */}
                     <div className="space-x-4">
-                        <div className="flex flex-wrap gap-2 md:mt-8">
+                        <div className="flex flex-wrap gap-2 md:mt-8 justify-end md:justify-start">
                             <Button
                                 size="medium"
                                 shape="circle"

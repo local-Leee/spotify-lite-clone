@@ -10,7 +10,7 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'overlayscrollbars/overlayscrollbars.css';
 import { useEffect, useRef } from 'react';
 import Footer from './Footer';
-
+import NowPlayingBar from './NowPlayingBar';
 interface RootLayoutClientProps {
     children: React.ReactNode;
 }
@@ -97,6 +97,7 @@ export default function RootLayoutClient({ children }: RootLayoutClientProps) {
                         </OverlayScrollbarsComponent>
                     </div>
                 </main>
+<NowPlayingBar />
             </div>
         </div>
     );

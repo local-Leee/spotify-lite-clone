@@ -19,143 +19,9 @@
     --color-neutral-03: #535353;
     --z-index: 1;
     --header-height: 64px;
+    --now-playing-height: 88px;
+    --grid-gap: 8px;
 }
-
-/* @layer reset {
-    * {
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
-    a,
-    abbr,
-    acronym,
-    address,
-    applet,
-    article,
-    aside,
-    audio,
-    b,
-    big,
-    blockquote,
-    body,
-    canvas,
-    caption,
-    center,
-    cite,
-    code,
-    dd,
-    del,
-    details,
-    dfn,
-    div,
-    dl,
-    dt,
-    em,
-    embed,
-    fieldset,
-    figcaption,
-    figure,
-    footer,
-    form,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    header,
-    hgroup,
-    html,
-    i,
-    iframe,
-    img,
-    ins,
-    kbd,
-    label,
-    legend,
-    li,
-    mark,
-    menu,
-    nav,
-    object,
-    ol,
-    output,
-    p,
-    pre,
-    q,
-    ruby,
-    s,
-    samp,
-    section,
-    small,
-    span,
-    strike,
-    strong,
-    sub,
-    summary,
-    sup,
-    table,
-    tbody,
-    td,
-    tfoot,
-    th,
-    thead,
-    time,
-    tr,
-    tt,
-    u,
-    ul,
-    var,
-    video {
-        border: 0;
-        margin: 0;
-        padding: 0;
-        vertical-align: baseline;
-    }
-
-    button {
-        color: var(--text-subdued, #b3b3b3);
-        padding: 0;
-    }
-
-    article,
-    aside,
-    details,
-    figcaption,
-    figure,
-    footer,
-    header,
-    hgroup,
-    menu,
-    nav,
-    section {
-        display: block;
-    }
-
-    ol,
-    ul {
-        list-style: none;
-    }
-
-    blockquote,
-    q {
-        quotes: none;
-    }
-
-    blockquote:after,
-    blockquote:before,
-    q:after,
-    q:before {
-        content: '';
-        content: none;
-    }
-
-    table {
-        border-collapse: collapse;
-        border-spacing: 0;
-    }
-} */
 
 @layer fonts {
     html {
@@ -242,12 +108,16 @@
     display: grid;
     grid-template-areas:
         'global-nav global-nav global-nav'
-        'left-sidebar main-view main-view';
+        'left-sidebar main-view main-view'
+        'now-playing-bar now-playing-bar now-playing-bar';
     grid-template-columns: 420px 1fr;
-    grid-template-rows: var(--header-height) calc(100vh - var(--header-height));
-    column-gap: 8px;
+    grid-template-rows:
+        var(--header-height) calc(100vh - var(--header-height) - var(--now-playing-height))
+        var(--now-playing-height);
+    gap: var(--grid-gap);
     height: 100vh;
     overflow: hidden;
+    min-height: 600px;
 }
 
 .grid-global-nav {
@@ -268,4 +138,11 @@
     overflow: hidden;
     z-index: 1;
     position: relative;
+}
+
+.grid-now-playing-bar {
+    grid-area: now-playing-bar;
+    z-index: 1;
+    position: relative;
+    background-color: pink;
 }

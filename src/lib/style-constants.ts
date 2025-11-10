@@ -14,6 +14,7 @@ export const CSS_CLASSES = {
     GRID_GLOBAL_NAV: 'grid-global-nav',
     GRID_LEFT_SIDEBAR: 'grid-left-sidebar',
     GRID_MAIN_VIEW: 'grid-main-view',
+    GRID_NOW_PLAYING_BAR: 'grid-now-playing-bar',
     
     // 공통 스타일
     OVERFLOW_HIDDEN: 'overflow-hidden',
