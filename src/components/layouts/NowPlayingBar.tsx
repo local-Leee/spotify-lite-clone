@@ -1,4 +1,6 @@
 'use client';
+import { IconLike } from '@/components/icons';
+import { Button } from '@/components/ui';
 import { CSS_CLASSES } from '@/lib/style-constants';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
@@ -13,15 +15,30 @@ export default function NowPlayingBar() {
                 </div>
                 <div>
                     <Link href="/" className='now-playing-bar__title'>
-
-                        <h1>Now Playing</h1>
+                        Guilty
                     </Link>
                     <Link href="/" className='now-playing-bar__artist'>
                         태민
                     </Link>
                 </div>
+                <Button>
+                    <IconLike />
+                </Button>
             </div>
-            <div className='now-playing-bar__center'></div>
+            <div className='now-playing-bar__center'>
+                <div className="playing-bar">
+                    <div className="palying-bar__control"></div>
+                    <div className="playing-bar__progress">
+                        <span className="playing-bar__progress-text">-:--</span>
+                        <div className="playing-bar__bar">
+                            Button
+
+                        </div>
+                        <span className="playing-bar__progress-text">-:--</span>
+                    </div>
+
+                </div>
+            </div>
             <div className='now-playing-bar__right'></div>
         </aside>
     );

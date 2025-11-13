@@ -5,6 +5,7 @@ export { default as IconFriendActivity } from './IconFriendActivity';
 export { default as IconHome } from './IconHome';
 export { default as IconInvite } from './IconInvite';
 export { default as IconLibrary } from './IconLibrary';
+export { default as IconLike } from './IconLike';
 export { default as IconLogo } from './IconLogo';
 export { default as IconMore } from './IconMore';
 export { default as IconPlay } from './IconPlay';
